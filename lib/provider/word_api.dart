@@ -1,21 +1,19 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:learnigo/utilty/url.dart';
+import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class WordApiProvider {
-  Dio _dio;
+class WorApiProvider extends InheritedWidget {
+  WorApiProvider({Key key, this.child}) : super(key: key, child: child);
 
-  WordApiProvider() {
-    _dio = Dio();
+  final Widget child;
+
+  static WorApiProvider of(BuildContext context) {
+    return (context.inheritFromWidgetOfExactType(WorApiProvider)
+        as WorApiProvider);
   }
 
-  Future getWord() async {
-    var db = FirebaseDatabase.instance;
-    db.reference().child("words").limitToFirst(10).once().then((DataSnapshot snapShot) {
-      print('Connect db ${snapShot.value}');
-    }).catchError((error) {
-      print("error-> ${error}");
-    });
+  @override
+  bool updateShouldNotify(WorApiProvider oldWidget) {
+    return true;
   }
 }
