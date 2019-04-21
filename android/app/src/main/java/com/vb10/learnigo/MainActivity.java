@@ -1,4 +1,4 @@
-package com.example.learnigo;
+package com.vb10.learnigo;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
