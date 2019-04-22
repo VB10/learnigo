@@ -1,4 +1,5 @@
 # learnigo
+![travis-learnigo](https://travis-ci.org/VB10/learnigo.svg?branch=master)
 
 
 ## Code Flow
