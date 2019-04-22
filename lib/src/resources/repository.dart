@@ -4,5 +4,5 @@ import 'package:learnigo/src/resources/word_api_provider.dart';
 class Repository {
   final translateApiProvider = TranslateApiProvider();
 
-  Future<ItemModel> fetchTranslateText() => translateApiProvider.fetchTranslateText();
+  Future<ItemModel> fetchTranslateText(String word) => translateApiProvider.fetchTranslateText(word);
 }

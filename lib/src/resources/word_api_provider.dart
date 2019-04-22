@@ -10,17 +10,14 @@ class TranslateApiProvider {
   final _lang = 'tr';
   final _url = 'https://translate.yandex.net/api/v1.5/tr.json/translate?';
 
-  Future<ItemModel> fetchTranslateText() async {
-    print("entered");
-    final response = await client
-        .get("${_url}key=$_apiKey&text=car&lang=tr");
-    print(response.body.toString());
-    if (response.statusCode == 200) {
-      // If the call to the server was successful, parse the JSON
-      return ItemModel.fromJson(json.decode(response.body));
-    } else {
-      // If that call was not successful, throw an error.
-      throw Exception('Failed to load post');
+  Future<ItemModel> fetchTranslateText(String word) async {
+    final response = await client.get("${_url}key=$_apiKey&text=$word&lang=tr");
+    switch (response.statusCode) {
+      case 200:
+        return ItemModel.fromJson(json.decode(response.body));
+        break;
+      default:
+        throw Exception('Failed to load post');
     }
   }
 }

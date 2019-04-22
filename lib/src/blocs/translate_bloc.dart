@@ -8,8 +8,8 @@ class TranslateBloc {
 
   Observable<ItemModel> get allTranslates => _wordFetcher.stream;
 
-  fetchallTranslate() async {
-    ItemModel itemModel = await _repository.fetchTranslateText();
+  fetchallTranslate(String word) async {
+    ItemModel itemModel = await _repository.fetchTranslateText(word);
     _wordFetcher.sink.add(itemModel);
   }
 
