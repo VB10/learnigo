@@ -10,7 +10,6 @@ class ItemModel {
 
     _code = parsedJson["code"].toString();
     _lang = parsedJson["lang"];
-
     List<String> temp = [];
     for (int i = 0; i < parsedJson['text'].length; i++) {
       String result = parsedJson['text'][i].toString();

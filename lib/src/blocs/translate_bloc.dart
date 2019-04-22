@@ -1,3 +1,4 @@
+import 'package:learnigo/src/models/image_model.dart';
 import 'package:learnigo/src/models/item_model.dart';
 import 'package:learnigo/src/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,6 +12,10 @@ class TranslateBloc {
   fetchallTranslate(String word) async {
     ItemModel itemModel = await _repository.fetchTranslateText(word);
     _wordFetcher.sink.add(itemModel);
+  }
+
+  fetchImage(String word) async {
+    UnSplashModel imageModel = await _repository.getImageWord(word);
   }
 
   void dispose() {
