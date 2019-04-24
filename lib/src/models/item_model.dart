@@ -7,7 +7,6 @@ class ItemModel {
 
   ItemModel.fromJson(Map<String, dynamic> parsedJson) {
     // print(parsedJson['results'].length);
-
     _code = parsedJson["code"].toString();
     _lang = parsedJson["lang"];
     List<String> temp = [];

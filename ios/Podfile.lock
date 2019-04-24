@@ -1,4 +1,7 @@
 PODS:
+  - connectivity (0.0.1):
+    - Flutter
+    - Reachability
   - Firebase/Core (5.16.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.5.0)
@@ -64,8 +67,10 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - Reachability (3.2)
 
 DEPENDENCIES:
+  - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_database (from `.symlinks/plugins/firebase_database/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
@@ -82,8 +87,11 @@ SPEC REPOS:
     - GoogleUtilities
     - leveldb-library
     - nanopb
+    - Reachability
 
 EXTERNAL SOURCES:
+  connectivity:
+    :path: ".symlinks/plugins/connectivity/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_database:
@@ -92,6 +100,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/flutter/ios"
 
 SPEC CHECKSUMS:
+  connectivity: d5992e3758d68b1c4b12d6e012fe0813f1aa1645
   Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
   firebase_core: c96aa8b2fcf7f5167d32f22034f502f9304952b8
   firebase_database: 431f77dc97eaba31168762025bc31c8a9a68e68b
@@ -105,6 +114,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
 
 PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
 

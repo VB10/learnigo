@@ -3,6 +3,7 @@ import 'package:http/http.dart';
 import 'package:learnigo/src/models/image_model.dart';
 import 'dart:convert';
 import './key.dart';
+import 'package:connectivity/connectivity.dart';
 
 class ImageApiProvider {
   Client client;
@@ -17,18 +18,15 @@ class ImageApiProvider {
   final _url = 'https://api.unsplash.com/search/photos?';
 
   Future<UnSplashModel> getWordImage(String word) async {
-    print(word);
     String url =
         "${_url}" + "$_page" + "&" + "$_query=$word" + "&" + "$_per_page";
-
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) return null;
     final response = await client.get(url, headers: header);
-
     switch (response.statusCode) {
       case 200:
         return UnSplashModel.fromJson(json.decode(response.body));
-        break;
-      default:
-        throw Exception('Failed to load post');
     }
+    return null;
   }
 }
