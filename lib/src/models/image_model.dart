@@ -3,8 +3,8 @@ class UnSplashModel {
   List<_Results> _results = [];
 
   UnSplashModel.fromJson(Map<String, dynamic> parsedJson) {
-    _total = parsedJson["total"];
-    if (total != 0) {
+    _total = parsedJson["total"] ?? 0;
+    if (parsedJson["total"] != 0) {
       final results = parsedJson["results"];
       List<_Results> temp = [];
       for (var i = 0; i < results.length; i++) {
@@ -15,7 +15,7 @@ class UnSplashModel {
     }
   }
 
-  int get total => _total;
+  int get total => _total ?? 0;
   List<_Results> get results => _results;
 }
 

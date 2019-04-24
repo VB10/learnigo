@@ -1,62 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:learnigo/src/blocs/image_bloc.dart';
 import 'package:learnigo/src/models/image_model.dart';
+import 'package:learnigo/src/ui/card/word.dart';
 import 'package:learnigo/styles/text.dart';
 
 class TranslateList extends StatelessWidget {
-  var textFC = TextEditingController();
+  get kTransparentImage => "lib/assets/placeImage.png";
   Future getItem() async {
     // await bloc.fetchallTranslate(textFC.text);
-    await imageBloc.fetchImage(",");
+    await imageBloc.fetchImage("car");
   }
 
   @override
   Widget build(BuildContext context) {
-    textFC.text = "car";
-
+    getItem();
     var imageStreamBuilder = StreamBuilder(
       stream: imageBloc.getImage,
       builder: (BuildContext context, AsyncSnapshot<UnSplashModel> snapshot) {
-        if (snapshot.hasData && snapshot.data.total != 0) {
-          print("aaa ${snapshot.data.total}");
-          return Image.network(
-            snapshot.data.results[0].urls.full,
-            height: 100,
+        if (snapshot.hasData) {
+          return FadeInImage.assetNetwork(
+            placeholder: kTransparentImage,
+            width: 300,
+            image: snapshot.data.results[0].urls.full,
           );
-        } else if (snapshot.hasError || snapshot.data.total == 0) {
+        } else if (snapshot.hasError) {
           print(snapshot.error);
           return Image.asset("lib/assets/placeImage.png");
+        } else {
+          return Center(
+            child: LinearProgressIndicator(),
+          );
         }
-        return Center(
-          child: LinearProgressIndicator(),
-        );
       },
     );
 
-    var column2 = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Expanded(
-            flex: 1,
-            child: Column(
-              children: <Widget>[
-                Expanded(flex: 1, child: imageStreamBuilder),
-                Container(
-                  color: Colors.black26,
-                  height: 1,
-                ),
-                FittedBox(
-                  child: Container(
-                    child: Text(
-                      "Car",
-                      style: lightStyle,
-                    ),
-                  ),
-                )
-              ],
-            )),
-      ],
-    );
+    var column2 = new WordCard(imageStreamBuilder: imageStreamBuilder);
 
     Widget card = Card(
         color: Colors.white,
