@@ -1,4 +1,3 @@
-import 'package:learnigo/src/models/image_model.dart';
 import 'package:learnigo/src/models/item_model.dart';
 import 'package:learnigo/src/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';

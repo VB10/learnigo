@@ -6,8 +6,7 @@ import 'package:learnigo/src/blocs/translate_bloc.dart';
 import 'package:learnigo/src/models/image_model.dart';
 import 'package:learnigo/src/models/item_model.dart';
 import 'package:learnigo/src/ui/card/word.dart';
-import 'package:learnigo/styles/text.dart';
-import 'package:english_words/english_words.dart';
+import 'package:learnigo/src/ui/widget/fit.dart';
 import 'package:learnigo/util/enum/snapshot_type.dart';
 import 'package:connectivity/connectivity.dart';
 
@@ -35,25 +34,11 @@ class _TranslateListState extends State<TranslateList> {
 
   Future getItem() async {
     // await bloc.fetchallTranslate(textFC.text);
-    await imageBloc.fetchImage("car");
     bloc.getEnglishWord(1);
-  }
 
-  streamWidget(SnapshotType type, {UnSplashModel model: null}) {
-    switch (type) {
-      case SnapshotType.success:
-        return FadeInImage.assetNetwork(
-          placeholder: this.kTransparentImage,
-          width: 300,
-          image: model.results[0].urls.full,
-        );
-      case SnapshotType.error:
-        return Image.asset(kTransparentImage);
-      case SnapshotType.loading:
-        return Center(
-          child: LinearProgressIndicator(),
-        );
-    }
+    bloc.getWord.listen((val) {
+      imageBloc.fetchImage(val);
+    });
   }
 
   @override
@@ -63,22 +48,21 @@ class _TranslateListState extends State<TranslateList> {
       stream: imageBloc.getImage,
       builder: (BuildContext context, AsyncSnapshot<UnSplashModel> snapshot) {
         if (snapshot.hasData) {
-          return streamWidget(SnapshotType.success, model: snapshot.data);
+          return FadeInImage.assetNetwork(
+            placeholder: this.kTransparentImage,
+            width: 300,
+            image: snapshot.data.results[0].urls.full,
+          );
         } else if (snapshot.hasError) {
-          return streamWidget(SnapshotType.error);
-        } else {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return streamWidget(SnapshotType.loading);
-          } else {
-            return streamWidget(SnapshotType.error);
-          }
+          return Image.asset(kTransparentImage);
         }
+        return Center(child: LinearProgressIndicator());
       },
     );
 
-    var val = StreamBuilder(
+    var wordStream = StreamBuilder(
       stream: bloc.getWord,
-      initialData: "s",
+      initialData: "",
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         this.data = snapshot.data ?? "-";
         return Container(
@@ -89,74 +73,50 @@ class _TranslateListState extends State<TranslateList> {
       },
     );
 
-    Widget wordCard =
-        new WordCard(imageStreamBuilder: imageStreamBuilder, word: "car");
+    succesOnPress() {}
+    failOnPress() {}
+    floatinOnPress() {}
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Learnigo"),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              barrierDismissible: true,
-              builder: (BuildContext context) {
-                return StreamBuilder(
-                  stream: bloc.allTranslates,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<ItemModel> snapshot) {
-                    if (snapshot.data == null) {
-                      return Center(
-                        child: LinearProgressIndicator(),
-                      );
-                    } else {}
-                    return Container(
-                      child: Text(snapshot.data.results.first ?? ""),
-                    );
-                  },
-                );
-              });
-          bloc.fetchallTranslate(this.data);
-        },
-        tooltip: "Translate",
-        child: Icon(Icons.search),
-      ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
+        appBar: AppBar(
+          title: Text("Learnigo"),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            buildShowDialog(context);
+            bloc.fetchallTranslate(this.data);
+          },
+          tooltip: "Translate",
+          child: Icon(Icons.search),
+        ),
+        body: Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
           Expanded(
             flex: 1,
-            child: val,
+            child: wordStream,
           ),
-          Expanded(
-              flex: 1,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: FittedBox(
-                                child: IconButton(
-                          icon: Icon(Icons.check),
-                          color: Colors.green,
-                          onPressed: () {},
-                        ))),
-                        Expanded(
-                            child: FittedBox(
-                                child: IconButton(
-                          icon: Icon(Icons.cancel),
-                          color: Colors.red,
-                          onPressed: () {},
-                        ))),
-                      ],
-                    ),
-                  ),
-                ],
-              ))
-        ],
-      ),
-    );
+          //TODO button add children property HAVE ERROR FIX IT!!!
+          Expanded(flex: 1, child: ExpandedColumnWidget(data: this.data,context: this.context))
+        ]));
+  }
+
+  Future buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return StreamBuilder(
+            stream: bloc.allTranslates,
+            builder: (BuildContext context, AsyncSnapshot<ItemModel> snapshot) {
+              if (snapshot.data == null) {
+                return Center(
+                  child: LinearProgressIndicator(),
+                );
+              } else {}
+              return Container(
+                child: Text(snapshot.data.results.first ?? ""),
+              );
+            },
+          );
+        });
   }
 }
