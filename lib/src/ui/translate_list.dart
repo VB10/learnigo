@@ -4,7 +4,7 @@ import 'package:learnigo/src/blocs/image_bloc.dart';
 import 'package:learnigo/src/blocs/translate_bloc.dart';
 import 'package:learnigo/src/ui/card/word.dart';
 import 'package:learnigo/src/ui/stream/word_convert_builder.dart';
-import 'package:learnigo/src/ui/widget/fit.dart';
+import 'package:learnigo/src/ui/widget/column_row_fit.dart';
 
 class TranslateList extends StatefulWidget {
   @override
@@ -25,29 +25,61 @@ class _TranslateListState extends State<TranslateList> {
     await imageBloc.fetchImage(this._data);
   }
 
+  succesOnPress() {}
+  failOnPress() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Learnigo"),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            buildShowDialog(context);
-          },
-          tooltip: "Translate",
-          child: Icon(Icons.search),
-        ),
-        body: Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
+      appBar: AppBar(
+        title: Text("Learnigo"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => buildShowDialog(context),
+        tooltip: "Translate",
+        child: Icon(Icons.search),
+      ),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
           Expanded(
             flex: 1,
             child: WordCard(word: this._data),
           ),
           Expanded(
-              flex: 1,
-              child:
-                  ExpandedColumnWidget(data: this._data, context: this.context)),
-        ]));
+            flex: 1,
+            child: ExpandedColumnWidget(
+              children: <Widget>[
+                Expanded(
+                  child: FittedBox(
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                      color: Colors.red,
+                      onPressed: succesOnPress(),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: FittedBox(
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.cancel,
+                        color: Colors.red,
+                      ),
+                      color: Colors.red,
+                      onPressed: failOnPress(),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Future buildShowDialog(BuildContext context) {
