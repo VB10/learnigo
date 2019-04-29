@@ -17,14 +17,20 @@ class ExpandedColumnWidget extends StatelessWidget {
             Expanded(
                 child: FittedBox(
                     child: IconButton(
-              icon: Icon(Icons.check),
-              color: Colors.green,
-              onPressed: succesOnPress(),
+              icon: Icon(
+                Icons.check,
+                color: Colors.green,
+              ),
+              color: Colors.red,
+              onPressed: failOnPress(),
             ))),
             Expanded(
                 child: FittedBox(
                     child: IconButton(
-              icon: Icon(Icons.cancel),
+              icon: Icon(
+                Icons.cancel,
+                color: Colors.red,
+              ),
               color: Colors.red,
               onPressed: failOnPress(),
             )))

@@ -5,13 +5,15 @@ import 'package:learnigo/src/models/image_model.dart';
 class ImageCustomStream extends StatelessWidget {
   const ImageCustomStream({
     Key key,
+    @required this.word
   }) : super(key: key);
 
+  final String word;
   get kTransparentImage => "lib/assets/placeImage.png";
 
   @override
   Widget build(BuildContext context) {
-    imageBloc.fetchImage("car");
+    imageBloc.fetchImage(word);
     return StreamBuilder(
       stream: imageBloc.getImage,
       builder: (BuildContext context, AsyncSnapshot<UnSplashModel> snapshot) {

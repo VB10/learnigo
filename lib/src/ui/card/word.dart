@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:learnigo/src/models/image_model.dart';
+import 'package:learnigo/src/ui/stream/image_builder.dart';
 import 'package:learnigo/styles/text.dart';
 
 class WordCard extends StatelessWidget {
   const WordCard({
     Key key,
-    @required this.imageStreamBuilder, @required  this.word,
+    @required this.word,
   }) : super(key: key);
 
-  final StreamBuilder<UnSplashModel> imageStreamBuilder;
   final String word;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class WordCard extends StatelessWidget {
               flex: 1,
               child: Column(
                 children: <Widget>[
-                  Expanded(flex: 1, child: imageStreamBuilder),
+                  Expanded(flex: 1, child: ImageCustomStream(word: this.word)),
                   Container(
                     color: Colors.black26,
                     height: 1,
