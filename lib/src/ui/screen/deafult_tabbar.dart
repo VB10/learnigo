@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learnigo/src/ui/screen/profile.dart';
-import 'package:learnigo/src/ui/screen/translate_list.dart';
+import 'game.dart';
 
 class DefaultTabbar extends StatelessWidget {
   @override

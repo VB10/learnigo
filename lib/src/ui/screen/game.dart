@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:learnigo/src/blocs/image_bloc.dart';
 import 'package:learnigo/src/blocs/translate_bloc.dart';
 import 'package:learnigo/src/ui/card/word.dart';
-import 'package:learnigo/src/ui/stream/word_convert_builder.dart';
 import 'package:learnigo/src/ui/widget/column_row_fit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -89,6 +87,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
 
   _buildShowDialog(BuildContext context) {
     // Navigator.pop(context);
+    //TODO add buttons and fix button cancel error.
     // Alert(
     //   context: context,
     //   title: "Türkçe",
