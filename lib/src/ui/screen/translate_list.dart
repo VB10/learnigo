@@ -5,13 +5,14 @@ import 'package:learnigo/src/blocs/translate_bloc.dart';
 import 'package:learnigo/src/ui/card/word.dart';
 import 'package:learnigo/src/ui/stream/word_convert_builder.dart';
 import 'package:learnigo/src/ui/widget/column_row_fit.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
-class TranslateList extends StatefulWidget {
+class TranslateScreen extends StatefulWidget {
   @override
-  _TranslateListState createState() => _TranslateListState();
+  _TranslateScreenState createState() => _TranslateScreenState();
 }
 
-class _TranslateListState extends State<TranslateList> {
+class _TranslateScreenState extends State<TranslateScreen> {
   final kTransparentImage = "lib/assets/placeImage.png";
   String _data;
   @override
@@ -25,19 +26,25 @@ class _TranslateListState extends State<TranslateList> {
     await imageBloc.fetchImage(this._data);
   }
 
-  succesOnPress() {}
+  succesOnPress() {
+    Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
+        .show();
+  }
+
   failOnPress() {}
+  // The easiest way for creating RFlutter Alert
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Learnigo"),
+        automaticallyImplyLeading: true,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => buildShowDialog(context),
+        onPressed: () => _buildShowDialog(context),
         tooltip: "Translate",
-        child: Icon(Icons.search),
+        child: Icon(Icons.live_help),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -57,8 +64,7 @@ class _TranslateListState extends State<TranslateList> {
                         Icons.check,
                         color: Colors.green,
                       ),
-                      color: Colors.red,
-                      onPressed: succesOnPress(),
+                      onPressed: () => {},
                     ),
                   ),
                 ),
@@ -69,7 +75,6 @@ class _TranslateListState extends State<TranslateList> {
                         Icons.cancel,
                         color: Colors.red,
                       ),
-                      color: Colors.red,
                       onPressed: failOnPress(),
                     ),
                   ),
@@ -82,15 +87,17 @@ class _TranslateListState extends State<TranslateList> {
     );
   }
 
-  Future buildShowDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (BuildContext context) {
-          return WordConvertStream(
-            word: this._data,
-            key: Key("DialogWord"),
-          );
-        });
+  _buildShowDialog(BuildContext context) {
+    // Navigator.pop(context);
+    // Alert(
+    //   context: context,
+    //   title: "Türkçe",
+    //   type: AlertType.none,
+    //   buttons: DialoB,
+    //   content: WordConvertStream(
+    //     word: this._data,
+    //     key: Key("DialogWord"),
+    //   ),
+    // ).show();
   }
 }
