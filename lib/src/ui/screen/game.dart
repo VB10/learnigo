@@ -5,6 +5,8 @@ import 'package:learnigo/src/ui/card/word.dart';
 import 'package:learnigo/src/ui/widget/column_row_fit.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import 'gameSW/buttons.dart';
+
 class TranslateScreen extends StatefulWidget {
   @override
   _TranslateScreenState createState() => _TranslateScreenState();
@@ -24,12 +26,12 @@ class _TranslateScreenState extends State<TranslateScreen> {
     await imageBloc.fetchImage(this._data);
   }
 
-  succesOnPress() {
+  void _succesOnPress() {
     Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
         .show();
   }
 
-  failOnPress() {}
+  void _failOnPress() {}
   // The easiest way for creating RFlutter Alert
 
   @override
@@ -56,24 +58,20 @@ class _TranslateScreenState extends State<TranslateScreen> {
             child: ExpandedColumnWidget(
               children: <Widget>[
                 Expanded(
-                  child: FittedBox(
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                      onPressed: () => {},
+                  child: ReplyButtonsWidget(
+                    this._succesOnPress,
+                    Icon(
+                      Icons.check,
+                      color: Colors.green,
                     ),
                   ),
                 ),
                 Expanded(
-                  child: FittedBox(
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.cancel,
-                        color: Colors.red,
-                      ),
-                      onPressed: failOnPress(),
+                  child: ReplyButtonsWidget(
+                    this._failOnPress,
+                    Icon(
+                      Icons.cancel,
+                      color: Colors.red,
                     ),
                   ),
                 )
