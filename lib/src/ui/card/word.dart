@@ -25,14 +25,27 @@ class WordCard extends StatelessWidget {
                 children: <Widget>[
                   Expanded(flex: 1, child: ImageCustomStream(word: this.word)),
                   Container(
-                    color: Colors.black26,
+                    color: Color.fromRGBO(25, 22, 96, 0.1),
+                    margin: EdgeInsets.symmetric(horizontal: 10),
                     height: 1,
                   ),
                   FittedBox(
                     child: Container(
-                      child: Text(
-                        this.word,
-                        style: lightStyle,
+                      child: Row(
+                        children: <Widget>[
+                          Icon(Icons.star,color: Colors.orangeAccent,),
+                          SizedBox(width: 5),
+                          Text(
+                            this.word,
+                            style: const TextStyle(
+                              color: const Color(0xff191660),
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "Google Sans",
+                              fontStyle: FontStyle.normal,
+                              fontSize: 25
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   )
