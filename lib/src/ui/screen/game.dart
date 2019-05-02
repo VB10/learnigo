@@ -3,6 +3,7 @@ import 'package:learnigo/src/blocs/image_bloc.dart';
 import 'package:learnigo/src/blocs/translate_bloc.dart';
 import 'package:learnigo/src/ui/card/word.dart';
 import 'package:learnigo/src/ui/widget/column_row_fit.dart';
+import 'package:learnigo/styles/text.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'gameSW/buttons.dart';
@@ -39,17 +40,16 @@ class _TranslateScreenState extends State<TranslateScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         toolbarOpacity: 0,
-      
         backgroundColor: Color.fromRGBO(247, 247, 250, 100),
-        title: Text("Packages",
-            style: const TextStyle(
-              color: const Color(0xff191660),
-              fontWeight: FontWeight.w500,
-              fontFamily: "Google Sans",
-              fontStyle: FontStyle.normal,
-            )),
+        title: Row(
+          children: <Widget>[
+            Text("Learnigo", style: appBarTitleStyle),
+            SizedBox(width: 30),
+            Text("- Learn english best way", style: subTitleStyle)
+          ],
+        ),
       ),
       backgroundColor: Color.fromRGBO(247, 247, 250, 100),
       // floatingActionButton: FloatingActionButton(
@@ -62,7 +62,10 @@ class _TranslateScreenState extends State<TranslateScreen> {
         children: <Widget>[
           Expanded(
             flex: 1,
-            child: WordCard(word: this._data),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: WordCard(word: this._data),
+            ),
           ),
           Expanded(
             flex: 1,
@@ -72,18 +75,20 @@ class _TranslateScreenState extends State<TranslateScreen> {
                   child: ReplyButtonsWidget(
                     this._succesOnPress,
                     Icon(
-                      Icons.check,
-                      color: Colors.green,
+                      Icons.favorite,
+                      color: Colors.pink,
                     ),
+                    "Biliyorum"
                   ),
                 ),
                 Expanded(
                   child: ReplyButtonsWidget(
                     this._failOnPress,
                     Icon(
-                      Icons.cancel,
-                      color: Colors.red,
+                      Icons.pan_tool,
+                      color: Colors.black38,
                     ),
+                    "Bilmiyorum"
                   ),
                 )
               ],

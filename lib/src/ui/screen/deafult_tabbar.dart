@@ -15,11 +15,6 @@ class _DefaultTabbarState extends State<DefaultTabbar> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {},
-        //   backgroundColor: Colors.orange,
-        // ),
         bottomNavigationBar: BottomAppBar(
           elevation: 10,
           shape: CircularNotchedRectangle(),
@@ -36,7 +31,7 @@ class _DefaultTabbarState extends State<DefaultTabbar> {
                 onTap: () => print('hello'),
                 child: new Container(
                   //width: 100.0,
-                  height: 100.0,
+                  height: 80.0,
                   decoration: new BoxDecoration(
                     color: Colors.blueAccent,
                     border: new Border.all(color: Colors.white, width: 2.0),
@@ -68,7 +63,6 @@ class _DefaultTabbarState extends State<DefaultTabbar> {
             ],
             labelColor: Colors.red,
             unselectedLabelColor: Colors.black,
-            
             indicatorColor: Colors.transparent,
             onTap: (val) {
               print(val);

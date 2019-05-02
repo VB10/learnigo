@@ -28,6 +28,8 @@ dependencies:
   english_words: ^3.1.5
   connectivity: ^0.4.3+1
   rflutter_alert: ^1.0.2
+  flutter_screenutil: ^0.5.2
+
 
 
 

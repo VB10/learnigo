@@ -23,7 +23,10 @@ class WordCard extends StatelessWidget {
               flex: 1,
               child: Column(
                 children: <Widget>[
-                  Expanded(flex: 1, child: ImageCustomStream(word: this.word)),
+                  Expanded(flex: 1, child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ImageCustomStream(word: this.word),
+                  )),
                   Container(
                     color: Color.fromRGBO(25, 22, 96, 0.1),
                     margin: EdgeInsets.symmetric(horizontal: 10),
