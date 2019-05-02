@@ -29,6 +29,7 @@ dependencies:
   connectivity: ^0.4.3+1
   rflutter_alert: ^1.0.2
   flutter_screenutil: ^0.5.2
+  flutter_swiper: ^1.1.6
 
 
 

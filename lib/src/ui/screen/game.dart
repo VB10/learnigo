@@ -73,23 +73,21 @@ class _TranslateScreenState extends State<TranslateScreen> {
               children: <Widget>[
                 Expanded(
                   child: ReplyButtonsWidget(
-                    this._succesOnPress,
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.pink,
-                    ),
-                    "Biliyorum"
-                  ),
+                      this._succesOnPress,
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.pink,
+                      ),
+                      "Biliyorum"),
                 ),
                 Expanded(
                   child: ReplyButtonsWidget(
-                    this._failOnPress,
-                    Icon(
-                      Icons.pan_tool,
-                      color: Colors.black38,
-                    ),
-                    "Bilmiyorum"
-                  ),
+                      this._failOnPress,
+                      Icon(
+                        Icons.pan_tool,
+                        color: Colors.black38,
+                      ),
+                      "Bilmiyorum"),
                 )
               ],
             ),
