@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learnigo/src/ui/screen/deafult_tabbar.dart';
 import 'package:learnigo/src/ui/screen/profile.dart';
 import 'package:learnigo/src/ui/screen/temp/carddrag.dart';
+import 'package:learnigo/src/ui/widget/card/main.dart';
 
 void main() => runApp(App());
 
@@ -10,11 +11,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
-      initialRoute: "/temp",
+      initialRoute: "/",
       routes: {
         '/': (context) => DefaultTabbar(),
         '/profile': (context) => ProfileScreen(),
-        '/temp': (context) => MyHomePage(title: "veli",)
+        '/temp': (context) => MovieCardWidget()
       },
       debugShowCheckedModeBanner: false,
     );

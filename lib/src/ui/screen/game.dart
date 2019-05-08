@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learnigo/src/blocs/image_bloc.dart';
 import 'package:learnigo/src/blocs/translate_bloc.dart';
 import 'package:learnigo/src/ui/card/word.dart';
+import 'package:learnigo/src/ui/widget/card/main.dart';
 import 'package:learnigo/src/ui/widget/column_row_fit.dart';
 import 'package:learnigo/styles/text.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -28,8 +29,9 @@ class _TranslateScreenState extends State<TranslateScreen> {
   }
 
   void _succesOnPress() {
-    Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
-        .show();
+    // Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
+    //     .show();
+    print("okesls");
   }
 
   void _failOnPress() {}
@@ -64,7 +66,8 @@ class _TranslateScreenState extends State<TranslateScreen> {
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: WordCard(word: this._data),
+              //TODO child widget parse
+              child: MovieCardWidget(child: WordCard(word: this._data),onPressed: this._succesOnPress,),
             ),
           ),
           Expanded(

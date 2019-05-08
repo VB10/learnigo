@@ -15,6 +15,7 @@ class _MyHomePageState extends State<MyHomePage>
   AnimationController controller;
   Animation animation;
   List<Widget> cardList;
+  int _offset = 500;
   double x = 0;
   double y = 0;
 
@@ -49,10 +50,11 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     var animatedBuilderKK = AnimatedBuilder(
       animation: controller,
-      child: Align(alignment: animation.value, child: cardList.first),
+      child: Align(
+          alignment: animation.value, child: Center(child: cardList.first)),
       builder: (BuildContext context, Widget child) {
         return Transform.translate(
-          offset: Offset(-500 * controller.value, 0),
+          offset: Offset(this._offset * controller.value, 0),
           child: Transform.rotate(
               angle: controller.value * -3.14 / 12.0, child: child),
         );
@@ -68,23 +70,27 @@ class _MyHomePageState extends State<MyHomePage>
             Expanded(child: animatedBuilderKK),
             RaisedButton(
               onPressed: () {
-                // Animation<Offset> moveLeftToCenter = new Tween(
-                //         begin: new Offset(0.0, 500 / 2),
-                //         end: new Offset(100 / 2, 500 / 2))
-                //     .animate(controller);
-
                 this
                     .controller
-                    .animateTo(1, duration: Duration(seconds: 1))
+                    .animateTo(1, duration: Duration(milliseconds: 500))
                     .then((v) {
                   print("oke");
                   this.controller.reset();
+                  this._offset = 500;
                 });
-                // setState(() {
-                //   // cardList.removeAt(index);
-                //   x = 0;
-                //   y = 50;
-                // });
+              },
+            ),
+            RaisedButton(
+              child: Icon(Icons.arrow_right),
+              onPressed: () {
+                this
+                    .controller
+                    .animateTo(1, duration: Duration(milliseconds: 500))
+                    .then((v) {
+                  print("oke");
+                  this.controller.reset();
+                  this._offset = -500;
+                });
               },
             )
           ],
@@ -94,22 +100,6 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   List<Widget> _getMatchCard() {
-    // var controllerX = AnimationController(
-    //     duration: const Duration(seconds: 1), vsync: this, value: 0);
-    // var animatedBuilderKK = AnimatedBuilder(
-    //   animation: controllerX,
-    //   child: Container(
-    //     width: 300,
-    //     height: 500,
-    //   ),
-    //   builder: (BuildContext context, Widget child) {
-    //     return Transform.translate(
-    //       offset: Offset(-500 * controller.value, 0),
-    //       child: Transform.rotate(
-    //           angle: controller.value * -3.14 / 12.0, child: child),
-    //     );
-    //   },
-    // );
     List<MatchCard> cards = new List();
     cards.add(MatchCard(255, 0, 0, 10));
     cards.add(MatchCard(0, 255, 0, 20));
