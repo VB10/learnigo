@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const lightStyle = TextStyle(
   color: Colors.black,
@@ -33,3 +34,11 @@ const subTitleStyle = TextStyle(
   fontWeight: FontWeight.w300,
   fontSize: 15,
 );
+
+likeButtonStyle(ScreenUtil util) {
+  return TextStyle(
+      fontSize: util.setSp(12),
+      color: Colors.black,
+      fontFamily: "Poppins-Medium",
+      letterSpacing: .5);
+}

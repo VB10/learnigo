@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:learnigo/src/blocs/image_bloc.dart';
 import 'package:learnigo/src/blocs/translate_bloc.dart';
 import 'package:learnigo/src/ui/card/word.dart';
+import 'package:learnigo/src/ui/widget/box/fitted_column.dart';
 import 'package:learnigo/src/ui/widget/card/main.dart';
 import 'package:learnigo/src/ui/widget/column_row_fit.dart';
+import 'package:learnigo/src/ui/widget/icon/icon_text.dart';
 import 'package:learnigo/styles/text.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -59,43 +61,34 @@ class _TranslateScreenState extends State<TranslateScreen> {
       //   tooltip: "Translate",
       //   child: Icon(Icons.live_help),
       // ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              //TODO child widget parse
-              child: MovieCardWidget(child: WordCard(word: this._data),onPressed: this._succesOnPress,),
+      body: MovieCardWidget(
+        child: WordCard(word: this._data),
+        onRightPress: this._succesOnPress,
+        onRight: FittedColumnWidget(
+          child: RaisedButton(
+            onPressed: () {},
+            child: IconTextWidget(
+              icon: Icon(
+                Icons.thumb_down,
+                color: Colors.black,
+              ),
+              text: "Bilmiyorum",
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: ExpandedColumnWidget(
-              children: <Widget>[
-                Expanded(
-                  child: ReplyButtonsWidget(
-                      this._succesOnPress,
-                      Icon(
-                        Icons.favorite,
-                        color: Colors.pink,
-                      ),
-                      "Biliyorum"),
-                ),
-                Expanded(
-                  child: ReplyButtonsWidget(
-                      this._failOnPress,
-                      Icon(
-                        Icons.pan_tool,
-                        color: Colors.black38,
-                      ),
-                      "Bilmiyorum"),
-                )
-              ],
+        ),
+        onLeftPress: this._failOnPress,
+        onLeft: FittedColumnWidget(
+          child: RaisedButton(
+            onPressed: () {},
+            child: IconTextWidget(
+              icon: Icon(
+                Icons.thumb_up,
+                color: Colors.pink,
+              ),
+              text: "Biliyorum",
             ),
           ),
-        ],
+        ),
       ),
     );
   }
