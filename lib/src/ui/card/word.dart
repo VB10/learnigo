@@ -17,7 +17,7 @@ class WordCard extends StatelessWidget {
       color: Colors.white,
       margin: EdgeInsets.all(8.0),
       elevation: 10,
-      child: Row(
+      child:  Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(

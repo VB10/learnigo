@@ -34,7 +34,6 @@ class _TranslateScreenState extends State<TranslateScreen> {
   void _succesOnPress() {
     // Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
     //     .show();
-    print("okesls");
   }
 
   void _failOnPress() {}
@@ -57,12 +56,6 @@ class _TranslateScreenState extends State<TranslateScreen> {
         ),
       ),
       backgroundColor: backgroundColor,
-      
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => _buildShowDialog(context),
-      //   tooltip: "Translate",
-      //   child: Icon(Icons.translate),
-      // ),
       body: MovieCardWidget(
         child: WordCard(word: this._data),
         onRightPress: this._succesOnPress,

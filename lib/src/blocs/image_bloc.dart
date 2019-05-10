@@ -10,7 +10,13 @@ class ImageBloc {
 
   fetchImage(String word) async {
     UnSplashModel imageModel = await _repository.getImageWord(word);
-    _imageFetcher.sink.add(imageModel);
+    if (imageModel == null) {
+      _imageFetcher.addError(null);
+    } else {
+          _imageFetcher.sink.add(imageModel);
+    }
+
+
   }
 
   void dispose() {
