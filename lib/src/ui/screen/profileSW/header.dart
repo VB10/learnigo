@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learnigo/styles/colors.dart';
 
 class ProfileHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
@@ -15,8 +18,8 @@ class ProfileHeaderWidget extends StatelessWidget {
         ),
       ),
       Positioned.fill(
-        top: 100,
-        bottom: 100,
+        top: ScreenUtil.getInstance().setHeight(100),
+        bottom: ScreenUtil.getInstance().setHeight(100),
         child: CircleAvatar(
           backgroundColor: Colors.white,
           child: Image.asset(

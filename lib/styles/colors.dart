@@ -6,3 +6,4 @@ const profileGradientColors = [
 ];
 
 final profileBackgroundColor = Color(0x707070);
+final backgroundColor = Color.fromRGBO(247, 247, 250, 100);

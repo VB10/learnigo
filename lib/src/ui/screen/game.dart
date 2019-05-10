@@ -6,6 +6,7 @@ import 'package:learnigo/src/ui/widget/box/fitted_column.dart';
 import 'package:learnigo/src/ui/widget/card/main.dart';
 import 'package:learnigo/src/ui/widget/column_row_fit.dart';
 import 'package:learnigo/src/ui/widget/icon/icon_text.dart';
+import 'package:learnigo/styles/colors.dart';
 import 'package:learnigo/styles/text.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -46,7 +47,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
         elevation: 0,
         centerTitle: false,
         toolbarOpacity: 0,
-        backgroundColor: Color.fromRGBO(247, 247, 250, 100),
+        backgroundColor: backgroundColor,
         title: Row(
           children: <Widget>[
             Text("Learnigo", style: appBarTitleStyle),
@@ -55,38 +56,33 @@ class _TranslateScreenState extends State<TranslateScreen> {
           ],
         ),
       ),
-      backgroundColor: Color.fromRGBO(247, 247, 250, 100),
+      backgroundColor: backgroundColor,
+      
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () => _buildShowDialog(context),
       //   tooltip: "Translate",
-      //   child: Icon(Icons.live_help),
+      //   child: Icon(Icons.translate),
       // ),
       body: MovieCardWidget(
         child: WordCard(word: this._data),
         onRightPress: this._succesOnPress,
         onRight: FittedColumnWidget(
-          child: RaisedButton(
-            onPressed: () {},
-            child: IconTextWidget(
-              icon: Icon(
-                Icons.thumb_down,
-                color: Colors.black,
-              ),
-              text: "Bilmiyorum",
+          child: IconTextWidget(
+            icon: Icon(
+              Icons.thumb_down,
+              color: Colors.black,
             ),
+            text: "Bilmiyorum",
           ),
         ),
         onLeftPress: this._failOnPress,
         onLeft: FittedColumnWidget(
-          child: RaisedButton(
-            onPressed: () {},
-            child: IconTextWidget(
-              icon: Icon(
-                Icons.thumb_up,
-                color: Colors.pink,
-              ),
-              text: "Biliyorum",
+          child: IconTextWidget(
+            icon: Icon(
+              Icons.thumb_up,
+              color: Colors.pink,
             ),
+            text: "Biliyorum",
           ),
         ),
       ),

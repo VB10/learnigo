@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learnigo/src/ui/screen/deafult_tabbar.dart';
 import 'package:learnigo/src/ui/screen/profile.dart';
-import 'package:learnigo/src/ui/screen/temp/carddrag.dart';
 import 'package:learnigo/src/ui/widget/card/main.dart';
 
 void main() => runApp(App());
