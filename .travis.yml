@@ -1,9 +1,18 @@
 matrix:
+  # This causes the build to complete immediately upon first failure or once
+  # required jobs are green.
+  fast_finish: true
+
+  # Building APK/IPA takes a long time; do not wait for them to finish.
+  allow_failures:
+    - env: JOB=APK
+    - env: JOB=IPA
+
   include:
-    # Job 1) Run analyzer
-    - os: linux
-      env:
-        - SHARD=Analyze
+    # Runs unit tests without emulators.
+    - env: JOB=PR
+      os: linux
+      language: generic
       sudo: false
       addons:
         apt:
@@ -14,15 +23,28 @@ matrix:
             - libstdc++6
             - fonts-droid
       before_script:
-        - git clone --single-branch --branch stable https://github.com/flutter/flutter.git $HOME/flutter
-        - export PATH=$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH
-        - flutter doctor
+        - git clone https://github.com/flutter/flutter.git -b alpha --depth 1
       script:
-        - flutter analyze
-    # Job 2) Build the example binary for Android (APK)
-    - os: linux
-      env:
-        - SHARD="Build example apks"
+        - ./flutter/bin/flutter test
+
+    # Builds an APK.
+    - env: JOB=APK
+      os: linux
+      language: android
+      licenses:
+        - 'android-sdk-preview-license-.+'
+        - 'android-sdk-license-.+'
+        - 'google-gdk-license-.+'
+      android:
+        components:
+          - tools
+          - platform-tools
+          - build-tools-25.0.3
+          - android-25
+          - sys-img-armeabi-v7a-google_apis-25
+          - extra-android-m2repository
+          - extra-google-m2repository
+          - extra-google-android-support
       jdk: oraclejdk8
       sudo: false
       addons:
@@ -31,28 +53,32 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test # if we don't specify this, the libstdc++6 we get is the wrong version
           packages:
-            - lib32stdc++6 # https://github.com/flutter/flutter/issues/6207
             - libstdc++6
             - fonts-droid
       before_script:
-        - ./scripts/before_build_apks.sh
-        - export ANDROID_HOME=$HOME/android-sdk
-        - export PATH=$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH
+        - wget http://services.gradle.org/distributions/gradle-3.5-bin.zip
+        - unzip -qq gradle-3.5-bin.zip
+        - export GRADLE_HOME=$PWD/gradle-3.5
+        - export PATH=$GRADLE_HOME/bin:$PATH
+        - git clone https://github.com/flutter/flutter.git -b alpha --depth 1
       script:
-        - cd ./example
-        - flutter build apk
-    # Job 2) Build the example binary for iOS (IPA)
-    - os: osx
-      env:
-        - SHARD="Build example ipas"
+        - ./flutter/bin/flutter -v build apk
+
+    # Builds an IPA.
+    - env: JOB=IPA
+      os: osx
       language: generic
-      osx_image: xcode10.1
+      osx_image: xcode8.3
       before_script:
-        - ./scripts/before_build_ipas.sh
-        - export PATH=$HOME/flutter/bin:$HOME/flutter/bin/cache/dart-sdk/bin:$PATH
+        - pip install six
+        - brew update
+        - brew install --HEAD libimobiledevice
+        - brew install ideviceinstaller
+        - brew install ios-deploy
+        - git clone https://github.com/flutter/flutter.git -b alpha --depth 1
       script:
-        - cd ./example
-        - flutter build ios --no-codesign
+        - ./flutter/bin/flutter -v build ios --no-codesign
+
 cache:
   directories:
     - $HOME/.pub-cache
