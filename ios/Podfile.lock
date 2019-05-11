@@ -1,4 +1,7 @@
 PODS:
+  - connectivity (0.0.1):
+    - Flutter
+    - Reachability
   - Firebase/Core (5.16.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.5.0)
@@ -34,6 +37,9 @@ PODS:
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
   - Flutter (1.0.0)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - GoogleAppMeasurement (5.5.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -64,11 +70,17 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - Reachability (3.2)
+  - sqflite (0.0.1):
+    - Flutter
+    - FMDB (~> 2.7.2)
 
 DEPENDENCIES:
+  - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_database (from `.symlinks/plugins/firebase_database/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -78,20 +90,27 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseDatabase
     - FirebaseInstanceID
+    - FMDB
     - GoogleAppMeasurement
     - GoogleUtilities
     - leveldb-library
     - nanopb
+    - Reachability
 
 EXTERNAL SOURCES:
+  connectivity:
+    :path: ".symlinks/plugins/connectivity/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_database:
     :path: ".symlinks/plugins/firebase_database/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
+  connectivity: d5992e3758d68b1c4b12d6e012fe0813f1aa1645
   Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
   firebase_core: c96aa8b2fcf7f5167d32f22034f502f9304952b8
   firebase_database: 431f77dc97eaba31168762025bc31c8a9a68e68b
@@ -101,10 +120,13 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
   FirebaseInstanceID: 97ea7a5dca9afd72c79bfcdddb7a44aa1cbb42a1
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GoogleAppMeasurement: 621f3bc6211d5ba548debe01fafad30cf5ab6859
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  sqflite: d1612813fa7db7c667bed9f1d1b508deffc56999
 
 PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
 
