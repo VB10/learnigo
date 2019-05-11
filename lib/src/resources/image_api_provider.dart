@@ -20,7 +20,7 @@ class ImageApiProvider {
   Future<UnSplashModel> getWordImage(String word) async {
     String url =
         "${_url}" + "$_page" + "&" + "$_query=$word" + "&" + "$_per_page";
-    print(word);
+    // print(word);
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) return null;
     final response = await client.get(url, headers: header);

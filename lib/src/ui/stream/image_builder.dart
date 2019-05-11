@@ -3,10 +3,7 @@ import 'package:learnigo/src/blocs/image_bloc.dart';
 import 'package:learnigo/src/models/image_model.dart';
 
 class ImageCustomStream extends StatelessWidget {
-  const ImageCustomStream({
-    Key key,
-    @required this.word
-  }) : super(key: key);
+  const ImageCustomStream({Key key, @required this.word}) : super(key: key);
 
   final String word;
   get kTransparentImage => "lib/assets/placeImage.png";

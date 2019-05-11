@@ -7,17 +7,18 @@ class WordCard extends StatelessWidget {
   const WordCard({
     Key key,
     @required this.word,
+    @required this.fabPress,
   }) : super(key: key);
 
   final String word;
-
+  final VoidCallback fabPress;
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
       margin: EdgeInsets.all(8.0),
       elevation: 10,
-      child:  Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
@@ -52,7 +53,7 @@ class WordCard extends StatelessWidget {
                         ),
                       ),
                       FloatingActionButton(
-                        onPressed: (){},
+                        onPressed: this.fabPress,
                         child: Icon(Icons.translate),
                         mini: true,
                       )

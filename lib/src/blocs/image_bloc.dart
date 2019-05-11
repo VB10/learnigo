@@ -13,10 +13,8 @@ class ImageBloc {
     if (imageModel == null) {
       _imageFetcher.addError(null);
     } else {
-          _imageFetcher.sink.add(imageModel);
+      _imageFetcher.sink.add(imageModel);
     }
-
-
   }
 
   void dispose() {

@@ -35,6 +35,10 @@ class _TranslateScreenState extends State<TranslateScreen> {
     // Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
     //     .show();
   }
+  void _fabOnPress() {
+    Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
+        .show();
+  }
 
   void _failOnPress() {}
   // The easiest way for creating RFlutter Alert
@@ -57,7 +61,10 @@ class _TranslateScreenState extends State<TranslateScreen> {
       ),
       backgroundColor: backgroundColor,
       body: MovieCardWidget(
-        child: WordCard(word: this._data),
+        child: WordCard(
+          word: this._data,
+          fabPress: this._fabOnPress,
+        ),
         onRightPress: this._succesOnPress,
         onRight: FittedColumnWidget(
           child: IconTextWidget(
