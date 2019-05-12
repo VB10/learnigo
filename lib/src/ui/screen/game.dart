@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:learnigo/src/blocs/image_bloc.dart';
 import 'package:learnigo/src/blocs/translate_bloc.dart';
+import 'package:learnigo/src/sqlite/SqliteManager.dart';
+import 'package:learnigo/src/sqlite/model/word.dart';
 import 'package:learnigo/src/ui/card/word.dart';
 import 'package:learnigo/src/ui/widget/box/fitted_column.dart';
 import 'package:learnigo/src/ui/widget/card/main.dart';
@@ -20,6 +22,8 @@ class TranslateScreen extends StatefulWidget {
 class _TranslateScreenState extends State<TranslateScreen> {
   final kTransparentImage = "lib/assets/placeImage.png";
   String _data;
+  final dbHelper = SqliteManager.instance;
+
   @override
   initState() {
     super.initState();
@@ -34,7 +38,14 @@ class _TranslateScreenState extends State<TranslateScreen> {
   void _succesOnPress() {
     // Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
     //     .show();
+
+    var model = UserWordInformation();
+    model.word = this._data;
+    model.know = 1;
+
+    print(dbHelper.insert(model.toMap()));
   }
+
   void _fabOnPress() {
     Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
         .show();

@@ -53,9 +53,11 @@ class SqliteManager {
     return await db.query(table);
   }
 
-  Future<List<Map<T, K>>> queryAllModel<T, K>() async {
+  Future<List<Map<String, dynamic>>> queryAllKnow(bool isKnow) async {
     Database db = await instance.database;
-    return (await db.query(table)).cast();
+
+    return await db
+        .query(table, where: '$columnKnow = ?', whereArgs: [isKnow ? 1 : 0]);
   }
 
 // Force clean

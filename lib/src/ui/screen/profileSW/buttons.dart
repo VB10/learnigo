@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:learnigo/src/ui/card/status_card.dart';
 
 class StatusButttonWidget extends StatelessWidget {
+  const StatusButttonWidget(
+      {Key key, @required this.success, @required this.unsuccess})
+      : super(key: key);
+
+  final String success;
+  final String unsuccess;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -12,7 +18,7 @@ class StatusButttonWidget extends StatelessWidget {
             child: StatusCard(
               text: "Başarılı",
               color: Colors.green[300],
-              right: Text("25"),
+              right: Text(this.success),
             ),
           ),
         ),
@@ -21,7 +27,7 @@ class StatusButttonWidget extends StatelessWidget {
             child: StatusCard(
               text: "Hatalı",
               color: Colors.red[300],
-              right: Text("30"),
+              right: Text(this.unsuccess),
             ),
           ),
         ),

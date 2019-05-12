@@ -14,6 +14,24 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final dbHelper = SqliteManager.instance;
+  String succesCount = "0";
+  String unSuccesCount = "0";
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInformation();
+  }
+
+  getUserInformation() async {
+    final _succesCount = (await dbHelper.queryAllKnow(true)).length.toString();
+    final _unsuccesCount =
+        (await dbHelper.queryAllKnow(false)).length.toString();
+    setState(() {
+      succesCount = _succesCount;
+      unSuccesCount = _unsuccesCount;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,24 +48,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(
               height: 30,
             ),
-            Expanded(flex: 2, child: StatusButttonWidget()),
+            Expanded(
+                flex: 2,
+                child: StatusButttonWidget(
+                  success: this.succesCount,
+                  unsuccess: "0",
+                )),
             SizedBox(
               height: 30,
             ),
             Expanded(
               child: SignoutButttonWidget(
                 onPress: () async {
-                  var model = UserWordInformation();
-                  model.word = "welcome";
-                  model.know = true ? 1 : 0;
+                  // var model = UserWordInformation();
+                  // model.word = "welcome";
+                  // model.know = true ? 1 : 0;
 
                   // final id = await dbHelper.insert(model.toMap());
                   // print(id);
                   // final x = await dbHelper.queryAllModel();
                   // print(x);
-                  final x = await dbHelper.queryAllRaws();
-                  var k = UserWordInformation.fromListMap(x);
+                  // final x = await dbHelper.queryAllRaws();
+                  // var k = UserWordInformation.fromListMap(x);
 
+                  final x2 = await dbHelper.queryAllKnow(false);
+                  print(x2);
                   // UserWordInformation datas =
                   //     UserWordInformation.fromMap(x.first);
                   // print(datas);
