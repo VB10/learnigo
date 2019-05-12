@@ -10,7 +10,7 @@ class SqliteManager {
   final _databaseName = "learnigo.db";
   final _databaseVersion = 1;
 
-  static final table = 'my_table';
+  static final table = 'WordPerson';
 
   static final columnId = '_id';
   static final columnName = 'word';
@@ -36,16 +36,32 @@ class SqliteManager {
   Future _onCreate(Database db, int version) async {
     await db.execute('''
           CREATE TABLE $table (
-            $columnId INTEGER PRIMARY KEY,
+            $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
             $columnName TEXT NOT NULL,
             $columnKnow INTEGER NOT NULL
           )
           ''');
   }
 
-   Future<int> insert(Map<String, dynamic> row) async {
+  Future<int> insert(Map<String, dynamic> row) async {
     Database db = await instance.database;
     return await db.insert(table, row);
+  }
+
+  Future<List<Map<String, dynamic>>> queryAllRaws() async {
+    Database db = await instance.database;
+    return await db.query(table);
+  }
+
+  Future<List<Map<T, K>>> queryAllModel<T, K>() async {
+    Database db = await instance.database;
+    return (await db.query(table)).cast();
+  }
+
+// Force clean
+  Future<int> delete() async {
+    Database db = await instance.database;
+    return await db.delete(table);
   }
 
   Future close() async => _database.close();

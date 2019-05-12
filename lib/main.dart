@@ -14,7 +14,7 @@ class App extends StatelessWidget {
       routes: {
         '/': (context) => DefaultTabbar(),
         '/profile': (context) => ProfileScreen(),
-        '/temp': (context) => MovieCardWidget()
+        // '/temp': (context) => MovieCardWidget()
       },
       debugShowCheckedModeBanner: false,
     );
