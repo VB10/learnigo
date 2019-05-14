@@ -6,52 +6,58 @@ import 'package:learnigo/src/sqlite/model/word.dart';
 import 'package:learnigo/src/ui/card/word.dart';
 import 'package:learnigo/src/ui/widget/box/fitted_column.dart';
 import 'package:learnigo/src/ui/widget/card/main.dart';
-import 'package:learnigo/src/ui/widget/column_row_fit.dart';
 import 'package:learnigo/src/ui/widget/icon/icon_text.dart';
 import 'package:learnigo/styles/colors.dart';
 import 'package:learnigo/styles/text.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-
-import 'gameSW/buttons.dart';
 
 class TranslateScreen extends StatefulWidget {
   @override
   _TranslateScreenState createState() => _TranslateScreenState();
 }
 
-class _TranslateScreenState extends State<TranslateScreen> {
+class _TranslateScreenState extends State<TranslateScreen>
+    with AutomaticKeepAliveClientMixin<TranslateScreen> {
   final kTransparentImage = "lib/assets/placeImage.png";
-  String _data;
+  String _data = "";
   final dbHelper = SqliteManager.instance;
 
   @override
   initState() {
+    _getItem();
     super.initState();
-    getItem();
   }
 
-  getItem() async {
-    this._data = bloc.getEnglishWord(1);
+  _getItem() async {
+    // first call
+    if (this._data.isNotEmpty) return;
+
+    setState(() {
+      _data = bloc.getEnglishWord(1);
+    });
     await imageBloc.fetchImage(this._data);
   }
 
   void _succesOnPress() {
-    // Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
-    //     .show();
-
-    var model = UserWordInformation();
+    final model = UserWordInformation();
     model.word = this._data;
     model.know = 1;
-
     print(dbHelper.insert(model.toMap()));
+    // getItem();
   }
 
   void _fabOnPress() {
-    Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
-        .show();
+    // Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
+    //     .show();
+    print("right");
   }
 
-  void _failOnPress() {}
+  void _failOnPress() {
+    final model = UserWordInformation();
+    model.word = this._data;
+    model.know = 0;
+    print(dbHelper.insert(model.toMap()));
+    // getItem();
+  }
   // The easiest way for creating RFlutter Alert
 
   @override
@@ -114,4 +120,8 @@ class _TranslateScreenState extends State<TranslateScreen> {
     //   ),
     // ).show();
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learnigo/src/sqlite/SqliteManager.dart';
-import 'package:learnigo/src/sqlite/model/word.dart';
 import 'package:learnigo/src/ui/screen/profileSW/button.dart';
 import 'package:learnigo/src/ui/screen/profileSW/buttons.dart';
 import 'package:learnigo/src/ui/screen/profileSW/header.dart';
