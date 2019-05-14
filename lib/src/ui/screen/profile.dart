@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learnigo/src/blocs/app_bloc.dart';
 import 'package:learnigo/src/sqlite/SqliteManager.dart';
 import 'package:learnigo/src/ui/screen/profileSW/button.dart';
 import 'package:learnigo/src/ui/screen/profileSW/buttons.dart';
@@ -7,6 +8,8 @@ import 'package:learnigo/styles/colors.dart';
 import 'package:learnigo/styles/text.dart';
 
 class ProfileScreen extends StatefulWidget {
+  ProfileScreen({Key key, this.darkThemeEnabled}) : super(key: key);
+  final bool darkThemeEnabled;
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -55,6 +58,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 )),
             SizedBox(
               height: 30,
+            ),
+            Switch(
+              value: widget.darkThemeEnabled == null ? true : false,
+              onChanged: (val) {
+                appBloc.changeTheme;
+              },
             ),
             Expanded(
               child: SignoutButttonWidget(

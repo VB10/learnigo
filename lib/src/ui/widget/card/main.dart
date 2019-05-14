@@ -80,7 +80,6 @@ class _MovieCardWidgetState extends State<MovieCardWidget>
     );
 
     return Container(
-      color: Colors.white,
       child: Column(
         children: <Widget>[
           Expanded(child: animatedBuilder),

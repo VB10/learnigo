@@ -76,7 +76,6 @@ class _TranslateScreenState extends State<TranslateScreen>
           ],
         ),
       ),
-      backgroundColor: backgroundColor,
       body: MovieCardWidget(
         child: WordCard(
           word: this._data,

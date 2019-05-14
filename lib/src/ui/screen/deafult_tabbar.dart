@@ -21,8 +21,29 @@ class _DefaultTabbarState extends State<DefaultTabbar> {
         resizeToAvoidBottomInset: true,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
+          onPressed: null,
           elevation: 10,
-          isExtended: false,
+          child: Container(
+              //width: 100.0,
+              child: FittedBox(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  )),
+              height: ScreenUtil.instance.setHeight(150),
+              decoration: new BoxDecoration(
+                color: Colors.blueAccent,
+                border: new Border.all(color: Colors.white, width: 2.0),
+                gradient: LinearGradient(
+                    colors: [Color(0xFFf37335), Color(0xFFfdc830)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter),
+                borderRadius: new BorderRadius.all(Radius.circular(50)),
+              )),
         ),
         bottomNavigationBar: BottomAppBar(
           elevation: 10,
@@ -34,13 +55,13 @@ class _DefaultTabbarState extends State<DefaultTabbar> {
                   icon: Icon(
                 Icons.gamepad,
                 size: 30,
-                color: Color(0xFF191660),
+                
               )),
               Tab(
                   icon: Icon(
                 Icons.person_outline,
                 size: 30,
-                color: Color(0xFF191660),
+            
               )),
             ],
             labelColor: Colors.red,
