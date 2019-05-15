@@ -29,6 +29,7 @@ class SqliteManager {
   _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, _databaseName);
+    print(documentsDirectory);
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
   }
