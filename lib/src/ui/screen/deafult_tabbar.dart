@@ -9,18 +9,16 @@ class DefaultTabbar extends StatefulWidget {
 }
 
 class _DefaultTabbarState extends State<DefaultTabbar> {
-  final defaultWidget = [TranslateScreen(), ProfileScreen()];
-  var initVal = 0;
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.transparent,
           onPressed: null,
           elevation: 10,
           child: Container(
@@ -55,28 +53,16 @@ class _DefaultTabbarState extends State<DefaultTabbar> {
                   icon: Icon(
                 Icons.gamepad,
                 size: 30,
-                
               )),
               Tab(
                   icon: Icon(
                 Icons.person_outline,
                 size: 30,
-            
               )),
             ],
             labelColor: Colors.red,
             unselectedLabelColor: Colors.black,
             indicatorColor: Colors.transparent,
-            // onTap: (val) {
-            //   print(val);
-            //   if (val == 1)
-            //     return;
-            //   else {
-            //     setState(() {
-            //       initVal = val > 0 ? val - 1 : val;
-            //     });
-            //   }
-            // },
           ),
         ),
         body: TabBarView(

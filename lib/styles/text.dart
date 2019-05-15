@@ -37,13 +37,11 @@ const subTitleStyle = TextStyle(
 likeButtonStyle(ScreenUtil util) {
   return TextStyle(
       fontSize: util.setSp(12),
-      color: Colors.black,
       fontFamily: "Poppins-Medium",
       letterSpacing: .5);
 }
 
 const wordStyle = TextStyle(
-    color: const Color(0xff191660),
     fontWeight: FontWeight.w500,
     fontFamily: "Google Sans",
     fontStyle: FontStyle.normal,

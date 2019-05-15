@@ -1,6 +1,6 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:learnigo/src/blocs/app_bloc.dart';
 import 'package:learnigo/src/sqlite/SqliteManager.dart';
 import 'package:learnigo/src/ui/screen/profileSW/button.dart';
 import 'package:learnigo/src/ui/screen/profileSW/buttons.dart';
@@ -15,10 +15,13 @@ class ProfileScreen extends StatefulWidget {
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends State<ProfileScreen>
+    with AutomaticKeepAliveClientMixin {
   final dbHelper = SqliteManager.instance;
-  String succesCount = "0";
-  String unSuccesCount = "0";
+  String _succesCount = "0";
+  String _unsuccesCount = "0";
+
+  bool _switchValue = false;
 
   @override
   void initState() {
@@ -27,20 +30,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   getUserInformation() async {
-    final _succesCount = (await dbHelper.queryAllKnow(true)).length.toString();
-    final _unsuccesCount =
+    final __succesCount = (await dbHelper.queryAllKnow(true)).length.toString();
+    final __unsuccesCount =
         (await dbHelper.queryAllKnow(false)).length.toString();
     setState(() {
-      succesCount = _succesCount;
-      unSuccesCount = _unsuccesCount;
+      _succesCount = __succesCount;
+      _unsuccesCount = __unsuccesCount;
     });
   }
 
-  void changeBrightness() {
-    DynamicTheme.of(context).setBrightness(
-        Theme.of(context).brightness == Brightness.dark
-            ? Brightness.light
-            : Brightness.dark);
+  void _onSwitchChanged(bool value) {
+    _switchValue = value;
+    print(_switchValue);
+    DynamicTheme.of(context)
+        .setBrightness(_switchValue ? Brightness.light : Brightness.dark);
   }
 
   @override
@@ -61,45 +64,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Expanded(
                 flex: 2,
                 child: StatusButttonWidget(
-                  success: this.succesCount,
+                  success: this._succesCount,
                   unsuccess: "0",
                 )),
             SizedBox(
               height: 30,
             ),
             Switch(
-              value: widget.darkThemeEnabled == null ? true : false,
-              onChanged: (val) {
-                // appBloc.changeTheme;
-                changeBrightness();
-                print("work");
-              },
+              value: _switchValue,
+              onChanged: _onSwitchChanged,
             ),
             Expanded(
-              child: SignoutButttonWidget(
-                onPress: () async {
-                  // var model = UserWordInformation();
-                  // model.word = "welcome";
-                  // model.know = true ? 1 : 0;
-
-                  // final id = await dbHelper.insert(model.toMap());
-                  // print(id);
-                  // final x = await dbHelper.queryAllModel();
-                  // print(x);
-                  // final x = await dbHelper.queryAllRaws();
-                  // var k = UserWordInformation.fromListMap(x);
-
-                  final x2 = await dbHelper.queryAllKnow(false);
-                  print(x2);
-                  // UserWordInformation datas =
-                  //     UserWordInformation.fromMap(x.first);
-                  // print(datas);
-                },
-              ),
+              child: SignoutButttonWidget(onPress: null),
             )
           ],
         ),
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -15,7 +15,6 @@ class WordCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
       margin: EdgeInsets.all(8.0),
       elevation: 10,
       child: Row(
@@ -32,7 +31,7 @@ class WordCard extends StatelessWidget {
                         child: ImageCustomStream(word: this.word),
                       )),
                   Container(
-                    color: wordBackground,
+                    color: Theme.of(context).textTheme.body1.color.withAlpha(50),
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     height: 1,
                   ),
