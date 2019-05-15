@@ -15,7 +15,6 @@ const signoutStyle = TextStyle(
 );
 
 const profileTitleStyle = TextStyle(
-    color: const Color(0xff191660),
     fontWeight: FontWeight.w500,
     fontFamily: "Google Sans",
     fontStyle: FontStyle.normal,

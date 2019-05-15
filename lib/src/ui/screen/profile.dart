@@ -1,3 +1,4 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:learnigo/src/blocs/app_bloc.dart';
 import 'package:learnigo/src/sqlite/SqliteManager.dart';
@@ -35,6 +36,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  void changeBrightness() {
+    DynamicTheme.of(context).setBrightness(
+        Theme.of(context).brightness == Brightness.dark
+            ? Brightness.light
+            : Brightness.dark);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +70,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Switch(
               value: widget.darkThemeEnabled == null ? true : false,
               onChanged: (val) {
-                appBloc.changeTheme;
+                // appBloc.changeTheme;
+                changeBrightness();
+                print("work");
               },
             ),
             Expanded(
