@@ -8,7 +8,6 @@ const lightStyle = TextStyle(
   fontSize: 30.0,
 );
 const signoutStyle = TextStyle(
-  color: Color(0xff191660),
   fontWeight: FontWeight.w500,
   fontFamily: "Google Sans",
   fontStyle: FontStyle.normal,

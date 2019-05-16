@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:learnigo/styles/text.dart';
 
 class SignoutButttonWidget extends StatelessWidget {
-  const SignoutButttonWidget({Key key, @required this.onPress}) : super(key: key);
+  const SignoutButttonWidget({Key key, @required this.onPress})
+      : super(key: key);
 
   final VoidCallback onPress;
   @override
@@ -14,7 +15,6 @@ class SignoutButttonWidget extends StatelessWidget {
         Expanded(
           flex: 8,
           child: RaisedButton(
-            color: Colors.white,
             onPressed: this.onPress,
             child: Text("Signout", style: signoutStyle),
             elevation: 10,

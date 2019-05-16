@@ -1,3 +1,4 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learnigo/styles/colors.dart';
@@ -10,7 +11,6 @@ class ProfileHeaderWidget extends StatelessWidget {
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(200)),
           gradient: LinearGradient(
             colors: profileGradientColors, // whitish to gray
             tileMode: TileMode.repeated,
@@ -18,15 +18,10 @@ class ProfileHeaderWidget extends StatelessWidget {
         ),
       ),
       Positioned.fill(
-        top: ScreenUtil.getInstance().setHeight(100),
-        bottom: ScreenUtil.getInstance().setHeight(100),
-        child: CircleAvatar(
-          backgroundColor: Colors.white,
-          child: Image.asset(
-            "lib/assets/profile.png",
-          ),
-        ),
-      )
+          child: FlareActor(
+        "lib/assets/Teddy.flr",
+        animation: "idle",
+      ))
     ]);
   }
 }

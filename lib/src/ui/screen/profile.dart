@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     _switchValue = value;
     print(_switchValue);
     DynamicTheme.of(context)
-        .setBrightness(_switchValue ? Brightness.light : Brightness.dark);
+        .setBrightness(!_switchValue ? Brightness.light : Brightness.dark);
   }
 
   @override
@@ -70,12 +70,16 @@ class _ProfileScreenState extends State<ProfileScreen>
             SizedBox(
               height: 30,
             ),
-            Switch(
-              value: _switchValue,
-              onChanged: _onSwitchChanged,
+            ListTile(
+              title: Text("Change app theme"),
+              subtitle: Text("Dark"),
+              trailing: Switch(
+                value: _switchValue,
+                onChanged: _onSwitchChanged,
+              ),
             ),
             Expanded(
-              child: SignoutButttonWidget(onPress: null),
+              child: SignoutButttonWidget(onPress: () {}),
             )
           ],
         ),
