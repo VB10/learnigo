@@ -11,6 +11,7 @@ class ProfileHeaderWidget extends StatelessWidget {
     return Stack(children: <Widget>[
       Container(
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(200),bottomRight: Radius.circular(200)),
           gradient: LinearGradient(
             colors: profileGradientColors, // whitish to gray
             tileMode: TileMode.repeated,
