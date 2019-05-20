@@ -16,7 +16,8 @@ class App extends StatelessWidget {
               brightness: brightness,
             ),
         themedWidgetBuilder: (context, theme) {
-          return new MaterialApp(
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: theme,
             initialRoute: "/",
