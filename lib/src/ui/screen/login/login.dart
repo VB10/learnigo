@@ -21,19 +21,21 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              child: Icon(Icons.games),
-              onPressed: this._handleSignIn,
-            ),
-            UserLoginStream()
-          ],
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              RaisedButton(
+                child: Icon(Icons.games),
+                onPressed: this._handleSignIn,
+              ),
+              UserLoginStream()
+            ],
+          ),
         ),
       ),
     );
