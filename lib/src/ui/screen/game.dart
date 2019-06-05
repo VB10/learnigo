@@ -4,11 +4,13 @@ import 'package:learnigo/src/blocs/translate_bloc.dart';
 import 'package:learnigo/src/sqlite/SqliteManager.dart';
 import 'package:learnigo/src/sqlite/model/word.dart';
 import 'package:learnigo/src/ui/card/word.dart';
+import 'package:learnigo/src/ui/stream/word_convert_builder.dart';
 import 'package:learnigo/src/ui/widget/box/fitted_column.dart';
 import 'package:learnigo/src/ui/widget/card/main.dart';
 import 'package:learnigo/src/ui/widget/icon/icon_text.dart';
 import 'package:learnigo/styles/colors.dart';
 import 'package:learnigo/styles/text.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class TranslateScreen extends StatefulWidget {
   @override
@@ -46,9 +48,21 @@ class _TranslateScreenState extends State<TranslateScreen>
   }
 
   void _fabOnPress() {
-    // Alert(context: this.context, title: "RFLUTTER", desc: "Flutter is awesome.")
-    //     .show();
-    print("right");
+    Alert(
+      context: this.context,
+      title: "Çeviri",
+      type: AlertType.info,
+      content: Wrap(
+        children: <Widget>[
+          Text(this._data),
+          Icon(Icons.compare_arrows),
+          WordConvertStream( 
+            word: this._data,
+            key: Key("DialogWord"),
+          )
+        ],
+      ),
+    ).show();
   }
 
   void _failOnPress() {

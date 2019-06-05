@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:learnigo/src/ui/screen/deafult_tabbar.dart';
 import 'package:learnigo/src/ui/screen/login/login.dart';
 import 'package:learnigo/src/ui/screen/profile.dart';
-import 'package:dynamic_theme/theme_switcher_widgets.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 
 void main() => runApp(App());
@@ -21,7 +20,7 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: theme,
-            initialRoute: "/google",
+            initialRoute: "/",
             routes: {
               '/': (context) => DefaultTabbar(),
               '/profile': (context) => ProfileScreen(),

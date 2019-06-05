@@ -66,6 +66,6 @@ class SqliteManager {
     Database db = await instance.database;
     return await db.delete(table);
   }
-
+  
   Future close() async => _database.close();
 }
