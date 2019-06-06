@@ -4,6 +4,8 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'model/word.dart';
+
 // TODO: FIX English Sqlite Provider
 class SqliteManager {
   static Database _database;
@@ -54,11 +56,35 @@ class SqliteManager {
     return await db.query(table);
   }
 
-  Future<List<Map<String, dynamic>>> queryAllKnow(bool isKnow) async {
+  Future<int> queryRowKnowCount(bool isKnow) async {
     Database db = await instance.database;
+    int _isNumberKnow = isKnow ? 1 : 0;
+    final x = (await db.rawQuery(
+        "select COUNT($columnKnow) from $table where $columnKnow = $_isNumberKnow "));
+    return Sqflite.firstIntValue(x);
+  }
 
-    return await db
-        .query(table, where: '$columnKnow = ?', whereArgs: [isKnow ? 1 : 0]);
+  Future<int> queryRowAllCount() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery("select * from $table  "));
+  }
+
+  Future<List<dynamic>> queryRowListKnowDatas(bool isKnow) async {
+    Database db = await instance.database;
+    int _isNumberKnow = isKnow ? 1 : 0;
+    final x = (await db.rawQuery(
+        "select $columnName from $table where $columnKnow = $_isNumberKnow "));
+    var objectList = x.map((item) {
+      return item[columnWord];
+    }).toList();
+    return objectList;
+  }
+
+  Future<bool> queryIsTableHaveData(String data) async {
+    Database db = await instance.database;
+    final x = (await db
+        .rawQuery("select * from $table where $columnName like $data "));
+    return x.length > 0 ? true : false;
   }
 
 // Force clean
@@ -66,6 +92,6 @@ class SqliteManager {
     Database db = await instance.database;
     return await db.delete(table);
   }
-  
+
   Future close() async => _database.close();
 }

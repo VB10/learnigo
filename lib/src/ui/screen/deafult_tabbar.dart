@@ -14,6 +14,7 @@ class _DefaultTabbarState extends State<DefaultTabbar> {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     return DefaultTabController(
       length: 2,
+      initialIndex: 1,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

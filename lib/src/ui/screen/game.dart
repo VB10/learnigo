@@ -17,34 +17,35 @@ class TranslateScreen extends StatefulWidget {
   _TranslateScreenState createState() => _TranslateScreenState();
 }
 
-class _TranslateScreenState extends State<TranslateScreen>
-    with AutomaticKeepAliveClientMixin<TranslateScreen> {
+class _TranslateScreenState extends State<TranslateScreen> {
   final kTransparentImage = "lib/assets/placeImage.png";
   String _data = "";
   final dbHelper = SqliteManager.instance;
 
   @override
   initState() {
-    _getItem();
     super.initState();
+    _getItem();
   }
 
   _getItem() async {
+    String localData = await bloc.getEnglishWord(1);
     // first call
-    if (this._data.isNotEmpty) return;
-
     setState(() {
-      _data = bloc.getEnglishWord(1);
+      _data = localData;
     });
+    if (this._data.isEmpty) return;
+
     await imageBloc.fetchImage(this._data);
   }
 
-  void _succesOnPress() {
+  Future _succesOnPress() async {
+    //TODO : IF DATA HAVE LOCAL DB WİLL REMOVE IT.
     final model = UserWordInformation();
     model.word = this._data;
     model.know = 1;
     print(dbHelper.insert(model.toMap()));
-    // getItem();
+    await _getItem();
   }
 
   void _fabOnPress() {
@@ -56,7 +57,7 @@ class _TranslateScreenState extends State<TranslateScreen>
         children: <Widget>[
           Text(this._data),
           Icon(Icons.compare_arrows),
-          WordConvertStream( 
+          WordConvertStream(
             word: this._data,
             key: Key("DialogWord"),
           )
@@ -70,7 +71,7 @@ class _TranslateScreenState extends State<TranslateScreen>
     model.word = this._data;
     model.know = 0;
     print(dbHelper.insert(model.toMap()));
-    // getItem();
+    _getItem();
   }
   // The easiest way for creating RFlutter Alert
 
@@ -118,23 +119,4 @@ class _TranslateScreenState extends State<TranslateScreen>
       ),
     );
   }
-
-  _buildShowDialog(BuildContext context) {
-    // Navigator.pop(context);
-    //TODO add buttons and fix button cancel error.
-    // Alert(
-    //   context: context,
-    //   title: "Türkçe",
-    //   type: AlertType.none,
-    //   buttons: DialoB,
-    //   content: WordConvertStream(
-    //     word: this._data,
-    //     key: Key("DialogWord"),
-    //   ),
-    // ).show();
-  }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }

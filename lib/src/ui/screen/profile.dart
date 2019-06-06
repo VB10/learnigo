@@ -1,7 +1,6 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:learnigo/src/models/world_model.dart';
 import 'package:learnigo/src/sqlite/SqliteManager.dart';
 import 'package:learnigo/src/sqlite/model/word.dart';
 import 'package:learnigo/src/ui/screen/profileSW/button.dart';
@@ -17,44 +16,45 @@ class ProfileScreen extends StatefulWidget {
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen>
-    with AutomaticKeepAliveClientMixin {
+class _ProfileScreenState extends State<ProfileScreen> {
   final dbHelper = SqliteManager.instance;
   String _succesCount = "0";
   String _unsuccesCount = "0";
   List<Widget> _successList;
   List<Widget> _failList;
 
-  bool _switchValue = false;
+  bool _switchValue;
 
   @override
   void initState() {
     super.initState();
     _successList = new List<Widget>();
     _failList = new List<Widget>();
+    _switchValue =
+        DynamicTheme.of(context).brightness == Brightness.light ? false : true;
     getUserInformation();
+    dbHelper.queryAllRaws().then(dbAllItems);
   }
 
   dbAllItems(List<Map<String, dynamic>> val) {
     final allDatas = UserWordInformation.fromListMap(val).objectList;
     for (var item in allDatas) {
       if (item.know == 0)
-        _failList.add(Text(item.word));
+        _successList.add(ListTile(
+            title: Text(item.word),
+            trailing: Icon(Icons.check_circle_outline)));
       else
-        _successList.add(Text(item.word));
+        _failList.add(ListTile(
+            title: Text(item.word), trailing: Icon(Icons.error_outline)));
     }
   }
 
   getUserInformation() async {
-    final __succesCount = (await dbHelper.queryAllKnow(true)).length.toString();
-    dbHelper.queryAllRaws().then(dbAllItems);
-
-    // print(x.cast<ItemModel>());
-    final __unsuccesCount =
-        (await dbHelper.queryAllKnow(false)).length.toString();
+    final __succesCount = (await dbHelper.queryRowKnowCount(true));
+    final __unsuccesCount = (await dbHelper.queryRowKnowCount(false));
     setState(() {
-      _succesCount = __succesCount;
-      _unsuccesCount = __unsuccesCount;
+      _succesCount = __succesCount.toString();
+      _unsuccesCount = __unsuccesCount.toString();
     });
   }
 
@@ -70,14 +70,28 @@ class _ProfileScreenState extends State<ProfileScreen>
         builder: (context) {
           return SafeArea(
             child: Container(
-              height: 300,
-              child: ListView.builder(
-                itemCount: val ? _successList.length : _failList.length,
-                itemBuilder: (context, index) {
-                  return val ? _successList[index] : _failList[index];
-                },
-              ),
-            ),
+                height: 300,
+                child: Column(
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: val ? _successList.length : _failList.length,
+                        itemBuilder: (context, index) {
+                          return val ? _successList[index] : _failList[index];
+                        },
+                      ),
+                    )
+                  ],
+                )),
           );
         },
         context: context);
@@ -102,13 +116,9 @@ class _ProfileScreenState extends State<ProfileScreen>
               flex: 2,
               child: StatusButttonWidget(
                 success: this._succesCount,
-                unsuccess: "0",
-                onSuccess: () {
-                  showModalBottom(true);
-                },
-                onFail: () {
-                  showModalBottom(false);
-                },
+                unsuccess: this._unsuccesCount,
+                onSuccess: () => showModalBottom(true),
+                onFail: () => showModalBottom(false),
               ),
             ),
             SizedBox(
@@ -116,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             ),
             ListTile(
               title: Text("Change app theme"),
-              subtitle: Text("Dark"),
+              subtitle: Text(_switchValue ? "Dark" : "Light"),
               trailing: Switch(
                 value: _switchValue,
                 onChanged: _onSwitchChanged,
@@ -124,20 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             ),
             Expanded(
               child: SignoutButttonWidget(onPress: () async {
-                showModalBottomSheet(
-                    builder: (context) {
-                      return SafeArea(
-                        child: Container(
-                          child: ListView.builder(
-                            itemCount: this._successList.length,
-                            itemBuilder: (context, index) {
-                              return this._successList[index];
-                            },
-                          ),
-                        ),
-                      );
-                    },
-                    context: context);
+                final __succesCount = (await dbHelper.queryRowListKnowDatas(true));
               }),
             )
           ],
@@ -145,8 +142,4 @@ class _ProfileScreenState extends State<ProfileScreen>
       ),
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }

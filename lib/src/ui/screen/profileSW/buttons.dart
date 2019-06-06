@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learnigo/src/ui/card/status_card.dart';
 
 class StatusButttonWidget extends StatelessWidget {
   const StatusButttonWidget(

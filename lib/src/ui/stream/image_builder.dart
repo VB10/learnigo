@@ -10,7 +10,6 @@ class ImageCustomStream extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    imageBloc.fetchImage(word);
     return StreamBuilder(
       stream: imageBloc.getImage,
       builder: (BuildContext context, AsyncSnapshot<UnSplashModel> snapshot) {
@@ -23,11 +22,11 @@ class ImageCustomStream extends StatelessWidget {
         } else if (snapshot.hasError) {
           print(snapshot.error);
           return Image.asset("lib/assets/placeImage.png");
-        } else {
-          return Center(
-            child: LinearProgressIndicator(),
-          );
         }
+
+        return Center(
+          child: LinearProgressIndicator(),
+        );
       },
     );
   }

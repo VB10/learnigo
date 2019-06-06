@@ -15,7 +15,7 @@ class Repository {
       translateApiProvider.fetchTranslateText(word);
   Future<UnSplashModel> getImageWord(String word) =>
       imageApiProvider.getWordImage(word);
-  String getEnglishWord(int index) => englishApiProvider.getEnglishWord(index);
+  String getEnglishWord() => englishApiProvider.getEnglishWord();
    Future<String> getGoogleUser() =>
       googleApiProvider.gmailSignin();
 }
