@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:learnigo/src/blocs/signin_bloc.dart';
 
 class UserLoginStream extends StatelessWidget {
-  UserLoginStream({this.homeConext});
-  final BuildContext homeConext;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

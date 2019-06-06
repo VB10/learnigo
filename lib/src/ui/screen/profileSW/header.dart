@@ -6,7 +6,6 @@ import 'package:learnigo/styles/colors.dart';
 class ProfileHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
 
     return Stack(children: <Widget>[
       Container(

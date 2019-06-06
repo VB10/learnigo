@@ -3,6 +3,7 @@ import 'package:learnigo/src/ui/screen/deafult_tabbar.dart';
 import 'package:learnigo/src/ui/screen/login/login.dart';
 import 'package:learnigo/src/ui/screen/profile.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:learnigo/src/ui/screen/splash.dart';
 
 void main() => runApp(App());
 
@@ -20,11 +21,12 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: theme,
-            initialRoute: "/google",
+            initialRoute: "/",
             routes: {
-              '/': (context) => DefaultTabbar(),
+              '/': (context) => SplashView(),
               '/profile': (context) => ProfileScreen(),
-              '/google': (context) => GoogleLoginScreen(),
+              '/login': (context) => GoogleLoginScreen(),
+              '/tab': (context) => DefaultTabbar()
               // '/temp': (context) => MovieCardWidget()
             },
           );

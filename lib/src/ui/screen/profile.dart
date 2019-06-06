@@ -1,6 +1,7 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:learnigo/src/resources/enum/preferences.dart';
 import 'package:learnigo/src/sqlite/SqliteManager.dart';
 import 'package:learnigo/src/sqlite/model/word.dart';
 import 'package:learnigo/src/ui/screen/profileSW/button.dart';
@@ -8,6 +9,7 @@ import 'package:learnigo/src/ui/screen/profileSW/buttons.dart';
 import 'package:learnigo/src/ui/screen/profileSW/header.dart';
 import 'package:learnigo/styles/colors.dart';
 import 'package:learnigo/styles/text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key key, this.darkThemeEnabled}) : super(key: key);
@@ -20,6 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final dbHelper = SqliteManager.instance;
   String _succesCount = "0";
   String _unsuccesCount = "0";
+  String _userName = "";
   List<Widget> _successList;
   List<Widget> _failList;
 
@@ -50,9 +53,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   getUserInformation() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     final __succesCount = (await dbHelper.queryRowKnowCount(true));
     final __unsuccesCount = (await dbHelper.queryRowKnowCount(false));
     setState(() {
+      _userName = prefs.getString(SharedState.username.toString());
       _succesCount = __succesCount.toString();
       _unsuccesCount = __unsuccesCount.toString();
     });
@@ -60,7 +65,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _onSwitchChanged(bool value) {
     _switchValue = value;
-    print(_switchValue);
     DynamicTheme.of(context)
         .setBrightness(!_switchValue ? Brightness.light : Brightness.dark);
   }
@@ -108,7 +112,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(
               height: 30,
             ),
-            Text("Veli Bacık", style: profileTitleStyle),
+            Text(_userName, style: profileTitleStyle),
             SizedBox(
               height: 30,
             ),
@@ -126,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             ListTile(
               title: Text("Change app theme"),
-              subtitle: Text(_switchValue ? "Dark" : "Light"),
+              subtitle: Text(!_switchValue ? "Dark" : "Light"),
               trailing: Switch(
                 value: _switchValue,
                 onChanged: _onSwitchChanged,
@@ -134,8 +138,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             Expanded(
               child: SignoutButttonWidget(onPress: () async {
-                dbHelper.delete();
-                
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove(SharedState.username.toString());
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    "/login", ModalRoute.withName('/'));
               }),
             )
           ],
