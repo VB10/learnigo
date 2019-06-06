@@ -17,7 +17,8 @@ class TranslateScreen extends StatefulWidget {
   _TranslateScreenState createState() => _TranslateScreenState();
 }
 
-class _TranslateScreenState extends State<TranslateScreen> {
+class _TranslateScreenState extends State<TranslateScreen>
+    with AutomaticKeepAliveClientMixin<TranslateScreen> {
   final kTransparentImage = "lib/assets/placeImage.png";
   String _data = "";
   final dbHelper = SqliteManager.instance;
@@ -40,11 +41,17 @@ class _TranslateScreenState extends State<TranslateScreen> {
   }
 
   Future _succesOnPress() async {
-    //TODO : IF DATA HAVE LOCAL DB WİLL REMOVE IT.
     final model = UserWordInformation();
     model.word = this._data;
     model.know = 1;
-    print(dbHelper.insert(model.toMap()));
+
+    //if already answered update database value.
+    bool isAnswerData = await dbHelper.queryIsTableHaveData(model.word);
+    if (isAnswerData) {
+      dbHelper.queryUpdateRowItemKnow(model.word, true);
+    } else {
+      dbHelper.insert(model.toMap());
+    }
     await _getItem();
   }
 
@@ -54,6 +61,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
       title: "Çeviri",
       type: AlertType.info,
       content: Wrap(
+        alignment: WrapAlignment.center,
         children: <Widget>[
           Text(this._data),
           Icon(Icons.compare_arrows),
@@ -96,7 +104,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
           word: this._data,
           fabPress: this._fabOnPress,
         ),
-        onRightPress: this._succesOnPress,
+        onRightPress: this._failOnPress,
         onRight: FittedColumnWidget(
           child: IconTextWidget(
             icon: Icon(
@@ -106,7 +114,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
             text: "Bilmiyorum",
           ),
         ),
-        onLeftPress: this._failOnPress,
+        onLeftPress: this._succesOnPress,
         onLeft: FittedColumnWidget(
           child: IconTextWidget(
             icon: Icon(
@@ -119,4 +127,8 @@ class _TranslateScreenState extends State<TranslateScreen> {
       ),
     );
   }
+
+//User save current state..
+  @override
+  bool get wantKeepAlive => true;
 }

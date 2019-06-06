@@ -38,8 +38,8 @@ class TranslateBloc {
       return "End Game";
     else {
       String data = _repository.getEnglishWord();
-      var localData = await databaseLocal.queryRowListKnowDatas(true);
-      if (localData.length == 0) {
+      var localData = await databaseLocal.queryRowListKnowDatas(false);
+      if (localData.contains(data) == true) {
         data = await getNewDataLibrary();
       }
       localData.add(data);

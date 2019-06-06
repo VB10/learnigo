@@ -134,7 +134,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             Expanded(
               child: SignoutButttonWidget(onPress: () async {
-                final __succesCount = (await dbHelper.queryRowListKnowDatas(true));
+                dbHelper.delete();
+                
               }),
             )
           ],

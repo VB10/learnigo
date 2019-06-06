@@ -20,7 +20,7 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: theme,
-            initialRoute: "/",
+            initialRoute: "/google",
             routes: {
               '/': (context) => DefaultTabbar(),
               '/profile': (context) => ProfileScreen(),

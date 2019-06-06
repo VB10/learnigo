@@ -20,6 +20,18 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    signinBloc.getDisplayName.listen((onData) {
+      if (onData.isNotEmpty) {
+        Navigator.of(context).pushNamed("/");
+      } else {
+        print("data is null");
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -33,7 +45,9 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen> {
                 child: Icon(Icons.games),
                 onPressed: this._handleSignIn,
               ),
-              UserLoginStream()
+              UserLoginStream(
+                homeConext: context,
+              )
             ],
           ),
         ),

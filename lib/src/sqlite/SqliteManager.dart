@@ -83,7 +83,16 @@ class SqliteManager {
   Future<bool> queryIsTableHaveData(String data) async {
     Database db = await instance.database;
     final x = (await db
-        .rawQuery("select * from $table where $columnName like $data "));
+        .rawQuery("select * from $table where $columnName like \'$data\' "));
+    return x.length > 0 ? true : false;
+  }
+
+  Future<bool> queryUpdateRowItemKnow(String name, bool isKnow) async {
+    Database db = await instance.database;
+    String _isNumberKnow = (isKnow ? 1 : 0).toString();
+
+    final x = (await db.rawQuery(
+        "update $table set $columnKnow = $_isNumberKnow where $columnName =  \'$name\'"));
     return x.length > 0 ? true : false;
   }
 
