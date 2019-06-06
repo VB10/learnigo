@@ -19,10 +19,10 @@ class _SplashViewState extends State<SplashView> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString(SharedState.username.toString()) != null) {
       Navigator.of(context)
-          .pushNamedAndRemoveUntil("/tab", ModalRoute.withName('/'));
+          .pushNamedAndRemoveUntil("/tab", (Route route) => false);
     } else {
       Navigator.of(context)
-          .pushNamedAndRemoveUntil("/login", ModalRoute.withName('/'));
+          .pushNamedAndRemoveUntil("/login", (Route route) => false);
     }
   }
 

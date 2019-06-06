@@ -31,7 +31,7 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen> {
       if (onData.isNotEmpty) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString(SharedState.username.toString(), onData);
-        Navigator.of(context).pushNamed("/");
+        Navigator.of(context).pushNamed("/tab");
       } else {
         print("data is null");
       }
