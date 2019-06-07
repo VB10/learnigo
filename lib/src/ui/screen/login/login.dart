@@ -74,7 +74,9 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen> {
                         color: Colors.blue,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
-                        onPressed: this._handleSignIn,
+                        onPressed: () {
+                          throw Exception('Uncaught error thrown by app.');
+                        },
                         child: Wrap(
                           alignment: WrapAlignment.center,
                           crossAxisAlignment: WrapCrossAlignment.center,
@@ -99,27 +101,7 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen> {
                 ),
               )
             ],
-          )
-
-          // Container(
-          //   color: Colors.white,
-          //   child: Center(
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       children: <Widget>[
-          //         RaisedButton(
-          //           child: Icon(Icons.games),
-          //           onPressed: this._handleSignIn,
-          //         ),
-          //         UserLoginStream(
-          //           homeConext: context,
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          ),
+          )),
     );
   }
 }

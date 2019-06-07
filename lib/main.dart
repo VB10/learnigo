@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:learnigo/src/ui/screen/deafult_tabbar.dart';
 import 'package:learnigo/src/ui/screen/login/login.dart';
@@ -5,7 +6,15 @@ import 'package:learnigo/src/ui/screen/profile.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:learnigo/src/ui/screen/splash.dart';
 
-void main() => runApp(App());
+void main() {
+  Crashlytics.instance.enableInDevMode = true;
+
+  // Pass all uncaught errors to Crashlytics.
+  FlutterError.onError = (FlutterErrorDetails details) {
+    Crashlytics.instance.onError(details);
+  };
+  runApp(App());
+}
 
 class App extends StatelessWidget {
   @override
