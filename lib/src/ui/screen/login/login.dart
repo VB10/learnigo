@@ -74,9 +74,7 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen> {
                         color: Colors.blue,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
-                        onPressed: () {
-                          throw Exception('Uncaught error thrown by app.');
-                        },
+                        onPressed: _handleSignIn,
                         child: Wrap(
                           alignment: WrapAlignment.center,
                           crossAxisAlignment: WrapCrossAlignment.center,
