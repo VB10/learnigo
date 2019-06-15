@@ -7,3 +7,7 @@
 ## Code Flow
 ![travis](https://travis-ci.org/VB10/learnigo.svg?branch=master)
 ![learnigo](https://github.com/VB10/learnigo/blob/master/readme/LanguageGame.jpg?raw=true)
+
+
+## Android build
+flutter build apk --build-name 1.2.3 --build-number 99
