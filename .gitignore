@@ -72,3 +72,5 @@
 #key class ignore
 lib/src/resources/key.dart
 ios/GoogleService-Info.plist
+ios/Runner.app.dSYM.zip
+ios/Runner.ipa
