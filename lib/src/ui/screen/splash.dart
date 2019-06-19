@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:learnigo/src/resources/enum/preferences.dart';
@@ -15,46 +16,54 @@ class _SplashViewState extends State<SplashView> {
     controlUser();
   }
 
-  Future controlUser() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getString(SharedState.username.toString()) != null) {
+  void controlUser() {
+    Future.delayed(Duration(milliseconds: 500)).then((_) {
+      SharedPreferences.getInstance().then(_prefOnComplete).catchError(onError);
+    });
+  }
+
+  void _prefOnComplete(SharedPreferences pref) {
+    if (pref.getString(SharedState.username.toString()) != null) {
       Navigator.of(context)
           .pushNamedAndRemoveUntil("/tab", (Route route) => false);
     } else {
       Navigator.of(context)
-          .pushNamedAndRemoveUntil("/login", (Route route) => false);
+          .pushNamedAndRemoveUntil("/login", ModalRoute.withName('/splash'));
     }
   }
 
-  @override
-  void dispose() {
-    super.dispose();
+  void onError(val) {
+    print(val);
+    Crashlytics.instance.log(val);
   }
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.getInstance()..init(context);
     return Scaffold(
-      backgroundColor: Colors.white,
-      bottomNavigationBar: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CircularProgressIndicator(),
-            SizedBox(
-              width: 30,
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Image.asset("lib/assets/workChat.png"),
+          ),
+          Positioned(
+            bottom: 10,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                SizedBox(
+                  width: 30,
+                ),
+                Text(
+                  "Kontrol Ediliyor...",
+                ),
+              ],
             ),
-            Text(
-              "Kontrol Ediliyor...",
-            ),
-          ],
-        ),
-      ),
-      body: Container(
-        color: Colors.white,
-        child: Center(
-          child: Image.asset("lib/assets/work_chat.png"),
-        ),
+          )
+        ],
       ),
     );
   }

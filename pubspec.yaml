@@ -64,7 +64,7 @@ flutter:
     - lib/assets/google.png
     - lib/assets/Teddy.flr
     - lib/assets/loading.flr
-    - lib/assets/work_chat.png
+    - lib/assets/workChat.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

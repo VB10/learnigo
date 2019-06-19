@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:learnigo/src/blocs/signin_bloc.dart';
@@ -23,18 +24,28 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen> {
     signinBloc.fetchUser();
   }
 
+  FlareController _flareController;
+  String _flarePath;
+
   @override
   void initState() {
     super.initState();
-    signinBloc.getDisplayName.listen((onData) async {
-      if (onData.isNotEmpty) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString(SharedState.username.toString(), onData);
-        Navigator.of(context).pushNamed("/tab");
-      } else {
-        print("data is null");
-      }
+    _flarePath = "";
+    Future.delayed(Duration(milliseconds: 200)).then((_) {
+      setState(() {
+        _flarePath = "lib/assets/loading.flr";
+      });
     });
+//
+    // signinBloc.getDisplayName.listen((onData) async {
+    //   if (onData.isNotEmpty) {
+    //     SharedPreferences prefs = await SharedPreferences.getInstance();
+    //     prefs.setString(SharedState.username.toString(), onData);
+    //     Navigator.of(context).pushNamed("/tab");
+    //   } else {
+    //     print("data is null");
+    //   }
+    // });
   }
 
   @override
@@ -59,10 +70,14 @@ class _GoogleLoginScreenState extends State<GoogleLoginScreen> {
           body: Stack(
             children: <Widget>[
               Positioned.fill(
-                child: FlareActor(
-                  "lib/assets/loading.flr",
-                  animation: "idle",
-                ),
+                child: _flarePath.isEmpty
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : FlareActor(
+                        _flarePath,
+                        animation: "idle",
+                      ),
               ),
               Positioned.fill(
                 child: SafeArea(
