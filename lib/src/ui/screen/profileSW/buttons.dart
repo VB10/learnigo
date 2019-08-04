@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:learnigo/src/ui/card/status_card.dart';
 
 class StatusButttonWidget extends StatelessWidget {
+  const StatusButttonWidget(
+      {Key key,
+      @required this.success,
+      @required this.unsuccess,
+      @required this.onSuccess,
+      @required this.onFail})
+      : super(key: key);
+
+  final String success;
+  final String unsuccess;
+  final VoidCallback onSuccess;
+  final VoidCallback onFail;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -9,19 +20,45 @@ class StatusButttonWidget extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: Container(
-            child: StatusCard(
-              text: "Başarılı",
+            padding: EdgeInsets.all(5),
+            height: 60,
+            child: RaisedButton(
+              onPressed: this.onSuccess,
               color: Colors.green[300],
-              right: Text("25"),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Başarılı",
+                  ),
+                  Text(this.success),
+                ],
+              ),
             ),
           ),
         ),
         Expanded(
           child: Container(
-            child: StatusCard(
-              text: "Hatalı",
+            height: 60,
+            padding: EdgeInsets.all(5),
+            child: RaisedButton(
+              onPressed: this.onFail,
               color: Colors.red[300],
-              right: Text("30"),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Hatalı",
+                  ),
+                  Text(this.unsuccess),
+                ],
+              ),
             ),
           ),
         ),

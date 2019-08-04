@@ -17,6 +17,12 @@ class ItemModel {
     _results = temp;
   }
 
+  ItemModel(String word, String code, String lang) {
+    this._word = word;
+    this._code = code;
+    this._lang = lang;
+  }
+
   List<String> get results => _results;
   String get code => _code;
   String get lang => _lang;

@@ -10,7 +10,6 @@ class ReplyButtonsWidget extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     return InkWell(
       onTap: this.onSignedOut,
       child: FittedBox(

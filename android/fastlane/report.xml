@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.009542">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.002535">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: prompt" time="3.292642">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: flutter packages get" time="2.125489">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: flutter clean" time="1.621639">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: flutter build apk --build-number\=0.0.4 --build-name\=1.0.1" time="58.534969">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="6: upload_to_play_store" time="37.649913">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>

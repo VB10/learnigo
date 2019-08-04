@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learnigo/src/ui/stream/image_builder.dart';
-import 'package:learnigo/styles/card.dart';
 import 'package:learnigo/styles/text.dart';
 
 class WordCard extends StatelessWidget {
@@ -15,7 +14,6 @@ class WordCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
       margin: EdgeInsets.all(8.0),
       elevation: 10,
       child: Row(
@@ -26,13 +24,15 @@ class WordCard extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ImageCustomStream(word: this.word),
-                      )),
+                    flex: 1,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: ImageCustomStream(word: this.word),
+                    ),
+                  ),
                   Container(
-                    color: wordBackground,
+                    color:
+                        Theme.of(context).textTheme.body1.color.withAlpha(50),
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     height: 1,
                   ),
@@ -53,6 +53,7 @@ class WordCard extends StatelessWidget {
                         ),
                       ),
                       FloatingActionButton(
+                        heroTag: this.word,
                         onPressed: this.fabPress,
                         child: Icon(Icons.translate),
                         mini: true,

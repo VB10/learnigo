@@ -10,7 +10,6 @@ class IconTextWidget extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
 
     return Column(
       children: <Widget>[

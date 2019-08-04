@@ -10,8 +10,8 @@ class ImageCustomStream extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    imageBloc.fetchImage(word);
     return StreamBuilder(
+      key: ValueKey("asdasd"),
       stream: imageBloc.getImage,
       builder: (BuildContext context, AsyncSnapshot<UnSplashModel> snapshot) {
         if (snapshot.hasData) {

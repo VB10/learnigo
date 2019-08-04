@@ -14,7 +14,7 @@ class StatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: this.color,
+      color: this.color ?? Colors.transparent,
       child: ListTile(
           title: Text(
             this.text,

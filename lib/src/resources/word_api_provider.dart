@@ -11,7 +11,7 @@ class TranslateApiProvider {
   final _url = 'https://translate.yandex.net/api/v1.5/tr.json/translate?';
 
   Future<ItemModel> fetchTranslateText(String word) async {
-    final response = await client.get("${_url}key=$_apiKey&text=$word&lang=tr");
+    final response = await client.get("${_url}key=$_apiKey&text=$word&lang=$_lang");
     switch (response.statusCode) {
       case 200:
         return ItemModel.fromJson(json.decode(response.body));
