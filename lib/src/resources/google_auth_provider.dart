@@ -21,8 +21,8 @@ class GoogleApiProvider {
       return user.displayName;
     } catch (e) {
       print(e);
-      // MARK: Default 
-      return "Learnigo";
+      // MARK: Default
+      return null;
     }
   }
 }

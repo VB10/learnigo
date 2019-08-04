@@ -111,7 +111,7 @@ DEPENDENCIES:
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
-  - Flutter (from `.symlinks/flutter/ios-release`)
+  - Flutter (from `.symlinks/flutter/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
@@ -146,7 +146,7 @@ EXTERNAL SOURCES:
   firebase_crashlytics:
     :path: ".symlinks/plugins/firebase_crashlytics/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios-release"
+    :path: ".symlinks/flutter/ios"
   google_sign_in:
     :path: ".symlinks/plugins/google_sign_in/ios"
   path_provider:
@@ -161,9 +161,9 @@ SPEC CHECKSUMS:
   Crashlytics: 5aa8e90dcbf2f34898b4f5a0037787531246cca0
   Fabric: f6f21452846788bb44595d73e9909d79d328e617
   Firebase: fa80b9d987ca014a1ba9357496ef2a0178b28b12
-  firebase_auth: 7a2cc520766f90212b845a5b35316601707bfa25
-  firebase_core: ce5006bb48508ee4e71e0f429a3f519bb8ee2961
-  firebase_crashlytics: 4308eca795b89ab0fd28e0db58e9a3ec74fee332
+  firebase_auth: 00d6e1ab6d890cd6d3c624df61702e3a7072d1e3
+  firebase_core: b3b02d0b5e9d01aab5e50ba7cbcf84c73cb6883c
+  firebase_crashlytics: 90224b1e8534bb61de9db7d786892ba582e49a9a
   FirebaseAnalytics: 1743c5f4de3687d0745709dfdc4b1dea1484f44c
   FirebaseAuth: efc72b0f6fe075d2a6de8d81a6d9de83ef2b47eb
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc

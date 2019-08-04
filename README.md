@@ -11,3 +11,6 @@
 
 ## Android build
 flutter build apk --build-name 1.2.3 --build-number 99
+
+## IOS Fastlane
+> if have app.framework error for xcode , you run "flutter build ios" after publısh store
